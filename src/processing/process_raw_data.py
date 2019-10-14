@@ -39,8 +39,10 @@ if __name__ == "__main__":
         new_filepath = new_filepath.split('.')[0] + '.csv'
         if os.path.exists(new_filepath):
             # don't process
-            print('already processed')
+            print(f'already processed {raw_data_filepath}')
             continue
+        else:
+            print(f'processing {raw_data_filepath}')
 
         # Read in data and convert to BeautifulSoup format
         with open(raw_data_filepath, 'r', encoding='utf-8') as f:
