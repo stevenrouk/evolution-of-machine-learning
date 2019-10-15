@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # # Get resumption token
     # resumption_token = get_resumption_token(r.text)
 
-    resumption_token = '3923570|7001'
+    resumption_token = '3923570|276001'
 
     # while we have a resumption token, get API request and write to file
     # if we need to wait, wait
