@@ -32,17 +32,16 @@ def parse_record(record):
     return [identifier, url, title, set_spec, subjects, authors, dates, description]
 
 if __name__ == "__main__":
-    for raw_data_filepath in RAW_DATA_FILES:
-        print(f'processing {raw_data_filepath}')
+    for i, raw_data_filepath in enumerate(RAW_DATA_FILES):
         # Check to see if file already exists
         new_filepath = os.path.join(DATA_DIRECTORY_PROCESSED, 'dfs', os.path.split(raw_data_filepath)[1])
         new_filepath = new_filepath.split('.')[0] + '.csv'
         if os.path.exists(new_filepath):
             # don't process
-            print(f'already processed {raw_data_filepath}')
+            print(f'{i} - already processed {raw_data_filepath}')
             continue
         else:
-            print(f'processing {raw_data_filepath}')
+            print(f'{i} - processing {raw_data_filepath}')
 
         # Read in data and convert to BeautifulSoup format
         with open(raw_data_filepath, 'r', encoding='utf-8') as f:
