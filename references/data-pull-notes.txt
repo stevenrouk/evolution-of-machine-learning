@@ -1,0 +1,9 @@
+10/14
+I've successfully made 276 API calls, each of which returns 1000 records.
+Thus, if there are 1.6M records, I'm 17% of the way through pulling all of
+the metadata. I should be able to finish the data pull over the night, or
+tomorrow.
+
+10/15
+All data was successfully pulled last night. The API calls stopped at
+3923570|1603001, which is what I was expecting.
