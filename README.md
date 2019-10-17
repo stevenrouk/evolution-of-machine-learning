@@ -23,8 +23,6 @@ _Analysis of the evolution of the field of machine learning as discovered throug
 7. [Technologies & Techniques Used](#technologies--techniques-used)
 8. [Gallery](#gallery)
 
-_(Note: Due the nature of the content in this dataset, there is some inappropriate language.)_
-
 ## Motivation
 
 ### A Brief History
@@ -77,6 +75,8 @@ After processing the XML files to individual CSVs, I used another script to comb
 The final processed CSV file ended up being 1.7 GB, and the machine learning subset CSV file ended up as 81 MB. (This was down from a raw data size of 3.1 GB.)
 
 ## Exploratory Data Analysis (EDA)
+
+(Insert info here.)
 
 
 
