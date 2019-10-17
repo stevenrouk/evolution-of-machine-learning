@@ -99,34 +99,15 @@ def topic_evolution(
     """
     Look at the change in topic prevalence over time.
     """
-    model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_{n_components}_model.pkl')
-    vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
     weights_filename = os.path.join(MODELS_DIRECTORY, f'nmf_{n_components}_weights_W.pkl')
 
-    if not os.path.exists(model_filename):
-        print("model doesn't exist")
-        return
-    if not os.path.exists(vectorizer_filename):
-        print("vectorizer doesn't exist")
-        return
     if not os.path.exists(weights_filename):
         print("weights file doesn't exist")
         return
-
-    print('loading model')
-    with open(model_filename, 'rb') as f:
-        nmf_model = pickle.load(f)
-
-    print('loading vectorizer')
-    with open(vectorizer_filename, 'rb') as f:
-        tfidf_vectorizer = pickle.load(f)
     
     print('loading weights')
     with open(weights_filename, 'rb') as f:
         W = pickle.load(f)
-
-    features = np.array(tfidf_vectorizer.get_feature_names())
-    H = nmf_model.components_
 
     print('loading DataFrame')
     df_ml = pd.read_csv(ML_ONLY_FILEPATH, encoding='utf-8')
@@ -142,7 +123,7 @@ def topic_evolution(
         nrows = (W.shape[1] + 3) // 4
         ncols = 4
         last_row_min_idx = 4 * (nrows - 1)
-        fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
+        _, axs = plt.subplots(nrows=nrows, ncols=ncols)
         plt.rcParams.update({'font.size': 10})
         plt.tight_layout()
         #plt.suptitle("Prevalence of Topics Over Time")
@@ -186,7 +167,7 @@ def topic_evolution(
             year = str(year)
             vals.append(W_series[years == year])
 
-        fig, axs = plt.subplots(1, 1)
+        _, axs = plt.subplots(1, 1)
         if not isinstance(axs, np.ndarray):
             axs = np.array([axs])
         axs = axs.flatten()
