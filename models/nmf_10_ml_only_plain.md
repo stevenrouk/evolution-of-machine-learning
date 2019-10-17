@@ -20,7 +20,7 @@ hand_labeled_features = [
     'reinforcement learning',
     'bayesian',
     'graphs / graph ML',
-    'Generative adversarial networks',
+    'generative adversarial networks',
     'image classification',
     'clustering',
     'optimal solutions'
