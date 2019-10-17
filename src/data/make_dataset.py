@@ -66,12 +66,18 @@ if __name__ == "__main__":
     # # Get resumption token
     # resumption_token = get_resumption_token(r.text)
 
-    resumption_token = '3923570|276001'
+    resumption_token = '3923570|591001'
 
     # while we have a resumption token, get API request and write to file
     # if we need to wait, wait
     try:
+        fail_count = 0
         while resumption_token:
+            if int(resumption_token.split('|')[1]) > 1700001:
+                # Going to cut it here just since I don't know what happens
+                # at the last API pull
+                print(f'breaking the script at {resumption_token}')
+                break
             print(f'trying {resumption_token}')
             url = build_resumption_url(resumption_token)
             output_filename = make_name_file_safe(f'{resumption_token}') + '.xml'
@@ -83,9 +89,23 @@ if __name__ == "__main__":
                 print('success')
                 time.sleep(3)
                 resumption_token = get_resumption_token(r.text)
+                fail_count = 0
             elif r.status_code == 503:
-                print('503 response -- waiting 7 seconds')
-                time.sleep(7)
+                fail_count += 1
+                if fail_count < 3:
+                    print('503 response -- waiting 7 seconds')
+                    time.sleep(7)
+                elif fail_count < 7:
+                    print('503 response -- waiting 60 seconds')
+                    time.sleep(60)
+                elif fail_count < 10:
+                    print('503 response -- waiting 600 seconds')
+                    time.sleep(600)
+                elif fail_count < 20:
+                    print('503 response -- waiting 6000 seconds')
+                    time.sleep(6000)
+                else:
+                    print(f'Fail count is at {fail_count} -- stopping execution at token {resumption_token}')
     except Exception as e:
         # if anything fails, write the resumption token that failed to a file
         print(e)
