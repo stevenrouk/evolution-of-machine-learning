@@ -14,6 +14,8 @@ from gensim.models.ldamulticore import LdaMulticore
 import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 16})
 
+from topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
+
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
@@ -24,54 +26,6 @@ MODELS_DIRECTORY = os.path.join(ROOT_DIRECTORY, 'models')
 
 FINAL_DF_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'final.csv')
 ML_ONLY_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'machine_learning_only.csv')
-
-TOPIC_NAMES_3 = [
-    'non-network ML models', #0
-    'optimization / convergence', #1
-    'neural networks' #2
-]
-
-TOPIC_NAMES_10 = [
-    'machine learning / time series', #0
-    'gradient / optimization / convergence', #1
-    'neural networks / deep learning', #2
-    'reinforcement learning', #3
-    'variational bayesian', #4
-    'graphs / graph ML', #5
-    'ML attacks / GANs', #6
-    'image / text / classification', #7
-    'clustering', #8
-    'algorithms / regret / optimization' #9
-]
-
-TOPIC_NAMES_20 = [
-    '*** ? (privacy / large datasets?)', #0
-    'gradient / optimization / convergence', #1
-    'neural networks / deep learning', #2
-    'reinforcement learning', #3
-    'predictive modeling', #4
-    'graphs / graph ML', #5
-    'ML attacks / GANs', #6
-    'classification', #7
-    '*** ? (multi-armed bandit / regret?)', #8
-    'matrices', #9
-    '*** ? (ml research frameworks?)', #10
-    'clustering', #11
-    'feature selection', #12
-    'kernel methods / Hilbert space', #13
-    'NLP', #14
-    'CNNs / images', #15
-    'variational bayesian', #16
-    'domain adaptation / transfer learning', #17
-    'audio / speech recognition', #18
-    'time series' #19
-]
-
-TOPIC_NAMES_LOOKUP = {
-    3: TOPIC_NAMES_3,
-    10: TOPIC_NAMES_10,
-    20: TOPIC_NAMES_20
-}
 
 
 @click.group()
