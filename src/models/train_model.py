@@ -30,40 +30,6 @@ def cli():
     pass
 
 @cli.command()
-@click.option('--n-components', default=10, help='Number of NMF topics (to look up model).')
-def print_nmf_topic_words(n_components):
-    """
-    Print the most influential words of each latent topic.
-    """
-    model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_{n_components}_model.pkl')
-    vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
-
-    if not os.path.exists(model_filename):
-        print("model doesn\'t exist")
-        return
-    if not os.path.exists(vectorizer_filename):
-        print("vectorizer doesn't exist")
-        return
-
-    print('loading model')
-    with open(model_filename, 'rb') as f:
-        nmf_model = pickle.load(f)
-
-    print('loading vectorizer')
-    with open(vectorizer_filename, 'rb') as f:
-        tfidf_vectorizer = pickle.load(f)
-
-    features = np.array(tfidf_vectorizer.get_feature_names())
-    H = nmf_model.components_
-
-    for i, row in enumerate(H):
-        top_ten = np.argsort(row)[::-1][:10]
-        print('topic', i)
-        print('-->', ' '.join(features[top_ten]))
-        print(H[i, top_ten])
-        print()
-
-@cli.command()
 @click.option('--n-components', default=10, help='Number of NMF topics.')
 @click.option('--save-model', default=True)
 @click.option('--save-weights', default=True)
