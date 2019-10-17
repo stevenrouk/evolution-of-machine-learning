@@ -44,9 +44,9 @@ And keep in mind that thirty years ago, most homes in the US didn't have a perso
 
 Whereas previously you needed supercomputers and teams of researchers to create algorithms even capable of recognizing hand-written digits, these days millions of people have the computing power needed to create sophisticated facial recognition algorithms. (And for those who don't posess the computing power on their personal machines, they can simply purchase it through platforms like [AWS](https://aws.amazon.com/machine-learning/).)
 
-### A Quickly Changing Field
+### A Rapidly Evolving Field
 
-With this kind of rapidly changing technological landscape, I was curious as to characteristics of machine learning and how those have changed over the last few decades. As a data scientist and machine learning practitioner, I'm constantly looking for ways to better understand the field and keep up with developments. If I could find a way to analyze the recent trajectory of machine learning, I would be in a better place from which to put it to good use.
+With this kind of quickly changing technological landscape, I was curious as to characteristics of machine learning and how those have changed over the last few decades. As a data scientist and machine learning practitioner, I'm constantly looking for ways to better understand the field and keep up with developments. If I could find a way to analyze the recent trajectory of machine learning, I would be in a better place from which to put it to good use.
 
 ## The Data
 
@@ -76,16 +76,68 @@ The final processed CSV file ended up being 1.7 GB, and the machine learning sub
 
 ## Exploratory Data Analysis (EDA)
 
-(Insert info here.)
+First, I looked at the general distribution of papers by subject on arXiv.
 
+<img src="images/number_of_papers_per_subject_macro.png" alt="arXiv papers by subject">
 
+<sub><b></b> arXiv Papers by Subject </sub>
 
+As you can see, the majority of the papers published on arXiv are physics papers—although according to their own analysis, this might be changing with the rise of machine learning. (See https://arxiv.org/help/stats/2018_by_area/index for more.)
 
+What I was really interested in was the research papers specifically related to machine learning. I filtered the data down to just these papers by finding all papers that had "machine learning" as part of one of the subjects listed. There were 48,564 such papers, which accounted for about 3% of the total number of papers pulled from the site. The distribution of the subjects listed for these papers is shown below.
 
+<img src="images/top_twenty_machine_learning_subjects.png" alt="machine learning paper subjects">
 
+<sub><b></b> Machine Learning Paper Subjects </sub>
 
+Although the two subjects with "machine learning" in them are at the top of the list (which we would expect), the subsequent top subjects give us some view into what various sub-fields of machine learning might be: computer vision, language, optimization, robotics, etc.
 
+This subset of over 48,000 paper descriptions was the corpus that I worked with after this point.
 
+### Machine Learning Papers Over Time
+
+One of the most startling results from this analysis was also one of the simplest: looking at the number of machine learning papers published over time.
+
+<img src="images/machine_learning_papers_over_time.png" alt="machine learning papers published over time">
+
+<sub><b></b> Machine Learning Papers Published Over Time </sub>
+
+There are only 33 papers from before the year 2000 with the subject of machine learning, and until 2007 there were less than 100 new papers per year. In 2007, there were 122 new machine learning papers—in 2012, there were 1,629—and in 2019 so far, there have been 14,504 new papers on machine learning. (And still have over two months left in the year!)
+
+It's hard to underscore how significant of a shift this is. Not only has machine learning already had a monumental impact on society, but each year more time and energy is devoted to developing it as a field. It's hard to imagine what the next ten to twenty years are going to bring with this kind of investment being poured into machine learning.
+
+And, fittingly, this underscores the need for applying techniques like machine learning to understand the field of machine learning!
+
+## Topic Modeling
+
+The heart of the analysis involving using the natural language processing (NLP) technique of topic modeling to discover latent topics in the corpus of research paper descriptions. (Note: I didn't include the paper titles in my model, although I did display them as part of the analysis of my topics.) By using topic modeling to understand the research papers, I was essentially trying to discover cohesive sub-fields of machine learning. I used the technique of non-negative matrix factorization (NMF) to accomplish this.
+
+### Text Featurization and Model Hyperparameters
+
+I was able to achieve surprisingly good results with very little preprocessing or fine-tuning. The steps shown below comprised my primary analysis pipeline for the majority of the project.
+
+1. First, I converted the paper descriptions into tf-idf vectors using scikit-learn's TfidfVectorizer. I removed stop words as part of this process.
+2. Then, I fit an NMF model using the number of topics I was interested in fitting. For the majority of the analysis, I looked at 10 topics and got good results—however, I also looked at 3, 15, 20, and 30 topics, which gave additional insight into the data.
+3. Finally, I used the factored matrices `W` (the document-topic matrix) and `H` (the vocabulary-topic matrix) to look at the relationship between the text and the latent topics I had extracted.
+
+Although I usually would have done more feature engineering through word lemmatization, custom stop words, or vocabulary reduction, I was surprised to find that my NMF model didn't appear to need it to return very good results. ()
+
+### 10 Topics
+
+So what topics was I able to discover? Using an NMF hyperparameter of 10 topics, these were the words most indicative of the ten topics:
+
+| Topic Number | Topic Words |
+| --- | --- |
+| 0 | data learning machine time real analysis methods series classification sets |
+| 1 | optimization gradient convex matrix convergence stochastic problems method rank descent |
+| 2 | neural networks network deep training layer convolutional layers architecture architectures |
+| 3 | learning policy reinforcement agent rl agents control policies tasks reward |
+| 4 | model models inference latent bayesian variational variables distribution gaussian posterior |
+| 5 | graph graphs node nodes embedding structure edges network embeddings spectral |
+| 6 | adversarial attacks examples attack training robustness perturbations generative gan gans |
+| 7 | image task classification domain features images tasks model feature text |
+| 8 | clustering clusters cluster means algorithm spectral data algorithms points mixture |
+| 9 | algorithm regret bounds bound problem optimal sample algorithms complexity lower |
 
 --------
 
