@@ -321,7 +321,7 @@ Here are some ideas for future research in this area:
 3. Create a better predictive model. Potentially try to predict sub-categories (such as the "subjects" field categories).
 4. Look at which terms differentiate various topics from each other. I did this for macro subjects, but would be interested in applying this technique to sub-fields of machine learning.
 
-## Technologies & Techniques Used
+## Appendix #1: Technologies & Techniques Used
 
 Technologies:
 - Python
@@ -340,7 +340,7 @@ Techniques:
 - Naive Bayes classifier
 - t-SNE
 
-## Project Organization
+## Appendix #2: Project Organization
 
 This was the first project that I tried using the Data Science Cookie Cutter template for, and I think it helped the project organization overall! (Of course my code still exploded in the middle as I dove headlong into the analysis...)
 
