@@ -205,99 +205,152 @@ And here's what it looks like when we highlight the words in this paper that are
 
 And now, we're at a place where we can answer one of the original questions I was wondering about what I started this project: how has the field of machine learning changed over time? Armed with our ten topics and a fairly good understanding of what these topics represent, we can see how these topics have evolved over the last 20 years.
 
-<img src="images/topic_evolution_10/topic_0_evolution.png" alt="document words analyzed by color">
+<img src="images/test-all-boxplots.png">
 
-<sub><b></b> **machine learning / time series:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_1_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **gradient / optimization / convergence:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_2_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **neural networks / deep learning:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_3_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **reinforcement learning:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_4_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **variational bayesian:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_5_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **graphs / graph ML:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_6_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **ML attacks / GANs:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_7_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **image / text / classification:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_8_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **clustering:** Change in Topic Loading Distributions Over Time </sub>
-
-<img src="images/topic_evolution_10/topic_9_evolution.png" alt="document words analyzed by color">
-
-<sub><b></b> **algorithms / regret / optimization:** Change in Topic Loading Distributions Over Time </sub>
+<sub><b></b> Change in Topic Loading Distributions Over Time </sub>
 
 Here are some of the most interesting findings:
 
 1. The explosion of interest in neural networks and deep learning. These models have been responsible for much of the news-worthy progress we've seen in the last few years, and these approaches are becoming more feasible with time and computing power increases and we figure out how to leverage GPUs for much faster processing of matrices.
 2. The growth of the GAN / ML attack category. It would take a little more teasing apart to see which of those two areas was most responsible for this growth, although both topics have seen more interest in recent years. (And GANs were only invented in 2014.)
-2. The subtle downturn of topics like optimization, clustering, and a few other topics.
+3. The subtle downturn of topics like optimization, clustering, and a few other topics.
 
-<img src="images/test-all-boxplots.png">
+## Other Interesting Findings
+
+### 20 Topics
+
+Some other interesting topics show up if we use 20 topics.
+
+(insert results here)
+
+### One Topic Per Year
+
+If we restrict ourselves to only one latent topic, and we run a model for every year since 2000, some interesting results show up. It appears that 2019 is the year of the graph!
+
+(insert results here)
+
+### Querying Loadings
+
+What if we ask the question, "which paper is most closely aligned with a certain combination of topics?" For example, we might be interested in the paper that is most purely about graph ML and not much else. We can query our results by specifying the loading combination we're interested in and seeing which document is closest (via cosine similarity) to that query:
+
+(insert results here)
+
+### Paper Recommender
+
+We can also create a simple research paper recommender system based on the papers that people are interested in. Given a research paper that someone enjoyed (or maybe they didn't enjoy it, but they need to learn more about the topic anyway), we can return other similar papers.
+
+(insert results here)
+
+### Macro Subject Predictor
+
+I wanted to get at least a little predictive modeling in here (just for fun), so I trained a Naive Bayes classifier on the "macro" subjects for the full 1.6 million paper corpus—in other words, using the description of a paper to predict if that paper was related to physics, math, computer science, statistics, etc.
+
+Without much tuning, I got an accuracy of almost 90% on unseen data (89.4%)—pretty good for a first go!
+
+### Differentiating Terms for Macro Subjects
+
+(insert here—words that are diff between math and CS, for example.)
+
+Which words distinguish CS from Math?
+
+algorithm      10358    3213
+data            8356    3962
+network         7863     714
+based           7459    5744
+information     6939    1512
+proposed        5701    2212
+channel         5639     207
+systems         5609    6862
+networks        5574     705
+used            5515    4652
+algorithms      5510    1206
+each            5101    5816
+performance     5002     563
+approach        4813    5035
+present         4665    6363
+
+Which words distinguish Math from CS?
+
+prove           2409   18691
+space           2388   16510
+group           1102   16219
+theory          2724   13431
+finite          2187   12338
+function        3098   11883
+give            2087   11460
+result          2961   11126
+functions       2267   10933
+g               1390   10733
+algebra          473   10530
+equation         453   10267
+equations        701    9818
+class           2355    9681
+x                971    9461
 
 
+Which words distinguish Statistics from Math?
 
 
+data            1778    3962
+models           954    5163
+methods          698    3845
+analysis         550    4081
+approach         550    5035
+based            550    5744
+algorithm        541    3213
+distribution     539    4741
+proposed         490    2212
+regression       473     794
+used             464    4652
+statistical      463    1140
+estimation       453    1157
+bayesian         435     326
+use              384    5760
+more             378    5377
+
+### K-Means Clustering and t-SNE
+
+(insert here)
+
+## Conclusion
+
+Not only was this project interesting from a technical perspective, but I was incredibly curious about the results of the analysis as well because of my work in data science and machine learning. Through the application of NLP techniques, I've created a handy tool for myself (and hopefully a useful analysis for others!) to serve as a guide for various topics and sub-fields of machine learning. (I know I'll be diving more into neural networks in the coming months—something I've been intending to do for a while anyway.) I've also rekindled an interest in keeping up with the latest research papers coming out.
+
+## Future Research
+
+Here are some ideas for future research in this area:
+
+1. Identify which papers were the most ahead of their time (and possibly influential), in that they directly predated a surge of interest in an area.
+2. Analyze the distribution of authors of papers as it relates to topics.
+3. Create a better predictive model. Potentially try to predict sub-categories (such as the "subjects" field categories).
+4. Look at which terms differentiate various topics from each other. I did this for macro subjects, but would be interested in applying this technique to sub-fields of machine learning.
+
+## Technologies & Techniques Used
+
+Technologies:
+- Python
+- pandas
+- scikit-learn
+- NumPy
+- Jupyter Notebooks
+- matplotlib
+
+Techniques:
+- Natural language processing
+- Topic modeling
+- tf-idf matrices
+- Non-negative matrix factorization
+- Clustering (K-Means)
+- Naive Bayes classifier
+- t-SNE
+
+## Project Organization
+
+This was the first project that I tried using the Data Science Cookie Cutter template for, and I think it helped the project organization overall! (Of course my code still exploded in the middle as I dove headlong into the analysis...)
+
+Here's a rough organization of how the project is setup. (It doesn't follow this template exactly, but it's fairly close.)
 
 
----
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-...blank space
-
-
-
-
---------
-
-Project Organization
 ------------
 
     ├── LICENSE
