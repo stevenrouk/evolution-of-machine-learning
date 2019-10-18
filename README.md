@@ -120,24 +120,142 @@ I was able to achieve surprisingly good results with very little preprocessing o
 2. Then, I fit an NMF model using the number of topics I was interested in fitting. For the majority of the analysis, I looked at 10 topics and got good results—however, I also looked at 3, 15, 20, and 30 topics, which gave additional insight into the data.
 3. Finally, I used the factored matrices `W` (the document-topic matrix) and `H` (the vocabulary-topic matrix) to look at the relationship between the text and the latent topics I had extracted.
 
-Although I usually would have done more feature engineering through word lemmatization, custom stop words, or vocabulary reduction, I was surprised to find that my NMF model didn't appear to need it to return very good results. ()
+Although I usually would have done more feature engineering through word lemmatization, custom stop words, or vocabulary reduction, I was surprised to find that my NMF model didn't appear to need it to return very good results.
 
-### 10 Topics
+### 10 Topics - Relevant Words
 
-So what topics was I able to discover? Using an NMF hyperparameter of 10 topics, these were the words most indicative of the ten topics:
+So what topics was I able to discover? Using an NMF hyperparameter of 10 topics, these were the words most indicative of the topics:
 
-| Topic Number | Topic Words |
-| --- | --- |
-| 0 | data learning machine time real analysis methods series classification sets |
-| 1 | optimization gradient convex matrix convergence stochastic problems method rank descent |
-| 2 | neural networks network deep training layer convolutional layers architecture architectures |
-| 3 | learning policy reinforcement agent rl agents control policies tasks reward |
-| 4 | model models inference latent bayesian variational variables distribution gaussian posterior |
-| 5 | graph graphs node nodes embedding structure edges network embeddings spectral |
-| 6 | adversarial attacks examples attack training robustness perturbations generative gan gans |
-| 7 | image task classification domain features images tasks model feature text |
-| 8 | clustering clusters cluster means algorithm spectral data algorithms points mixture |
-| 9 | algorithm regret bounds bound problem optimal sample algorithms complexity lower |
+| Topic Number | Subjective Topic Name | Topic Words |
+| --- | --- | --- |
+| 0 | machine learning / time series | data learning machine time real analysis methods series classification sets |
+| 1 | gradient / optimization / convergence | optimization gradient convex matrix convergence stochastic problems method rank descent |
+| 2 | neural networks / deep learning | neural networks network deep training layer convolutional layers architecture architectures |
+| 3 | reinforcement learning | learning policy reinforcement agent rl agents control policies tasks reward |
+| 4 | variational bayesian | model models inference latent bayesian variational variables distribution gaussian posterior |
+| 5 | graphs / graph ML | graph graphs node nodes embedding structure edges network embeddings spectral |
+| 6 | ML attacks / GANs | adversarial attacks examples attack training robustness perturbations generative gan gans |
+| 7 | image / text / classification | image task classification domain features images tasks model feature text |
+| 8 | clustering | clustering clusters cluster means algorithm spectral data algorithms points mixture |
+| 9 | algorithms / regret / optimization | algorithm regret bounds bound problem optimal sample algorithms complexity lower |
+
+Although a couple of these topics don't seem as clear (e.g. topics 0 and 9), most of these topics are fairly cohesive and give insight into the development of machine learning as a field over the last 20 years.
+
+Additionally, there's at least one topic that is a bit mixed or confused: topic #6 appears to be about both vulnerabilities of machine learning algorithms ("adversarial attacks") and generative adversarial networks (GANs). Since both of these topics rely heavily on the term "adversarial", this topic appears to be a mixture of the two concepts.
+
+### 10 Topics - Relevant Papers / Documents
+
+For each one of these topics that we've discovered in the corpus of paper descriptions, there are certain papers that "load" most heavily on that topic—in other words, they contain words that are strongly related to that topic.
+
+For the **Neural Networks and Deep Learning** topic, here are the titles of the papers that load most heavily on that topic:
+
+| Most Relevant Papers: "Neural Networks / Deep Learning" |
+| --- |
+| Deep Neural Network Approximation using Tensor Sketching |
+| A Survey: Time Travel in Deep Learning Space: An Introduction to Deep Learning Models and How Deep Learning Models Evolved from the Initial Ideas |
+| Deep Recurrent Convolutional Neural Network: Improving Performance For Speech Recognition |
+| Deep Adaptive Network: An Efficient Deep Neural Network with Sparse Binary Connections |
+| Deep Fried Convnets |
+
+For the **Reinforcement Learning** topic, here are the paper titles:
+
+| Most Relevant Papers: "Reinforcement Learning" |
+| --- |
+| Is a Good Representation Sufficient for Sample Efficient Reinforcement Learning? |
+| Dealing with Non-Stationarity in Multi-Agent Deep Reinforcement Learning |
+| Scalable Centralized Deep Multi-Agent Reinforcement Learning via Policy Gradients |
+| Meta reinforcement learning as task inference |
+| Multi-Task Policy Search |
+
+And for the **Graphs and Graph ML** topic (one of my favorites! See my previous project on graphs: [Finding Patterns in Social Networks Using Graph Data](https://github.com/stevenrouk/social-network-graph-analysis)), here are the titles:
+
+| Most Relevant Papers: "Graphs and Graph ML" |
+| --- |
+| A simple yet effective baseline for non-attributed graph classification |
+| A Unified Framework for Structured Graph Learning via Spectral Constraints |
+| Adaptive Graph Convolutional Neural Networks |
+| Triple2Vec: Learning Triple Embeddings from Knowledge Graphs |
+| Adversarially Regularized Graph Autoencoder for Graph Embedding |
+
+### 10 Topics - Document Analyses
+
+If we wanted to analyze a specific document according to these topics and the relevant words, we can do that too. Here's an analysis of the "Graph Convolutional Reinforcement Learning" paper using these 10 topics:
+
+<img src="images/document_topic_analysis.png" alt="analysis of topic loadings for a single document">
+
+<sub><b></b> Topic Analysis of "Graph Convolutional Reinforcement Learning" </sub>
+
+And here's what it looks like when we highlight the words in this paper that are the most relevant to each topic:
+
+<img src="images/word_colors_1.png" alt="document words analyzed by color">
+
+<img src="images/word_colors_2.png" alt="document words analyzed by color">
+
+<img src="images/word_colors_3.png" alt="document words analyzed by color">
+
+<img src="images/word_colors_4.png" alt="document words analyzed by color">
+
+<sub><b></b> Word Analysis of "Graph Convolutional Reinforcement Learning" </sub>
+
+### 10 Topics - Evolution Over Time
+
+And now, we're at a place where we can answer one of the original questions I was wondering about what I started this project: how has the field of machine learning changed over time? Armed with our ten topics and a fairly good understanding of what these topics represent, we can see how these topics have evolved over the last 20 years.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+...blank space
+
+
+
 
 --------
 
