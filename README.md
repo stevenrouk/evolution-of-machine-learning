@@ -21,6 +21,10 @@ _Analysis of the evolution of the field of machine learning as discovered throug
 
 ## Motivation
 
+### Goal of the Project
+
+The goal of this project was to identify subfields of machine learning through topic modeling, and to see how interest in those subfields has changed over time.
+
 ### A Brief History
 
 <img src="images/deep_blue.jpeg">
