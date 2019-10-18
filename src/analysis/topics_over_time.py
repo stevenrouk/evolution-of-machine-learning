@@ -41,6 +41,7 @@ def cli():
 @click.option('--all-topics', is_flag=True, default=False)
 @click.option('--use-topic-names', is_flag=True, default=False)
 @click.option('--output', default='')
+@click.option('--output-figsize', nargs=2, default=None, type=int)
 def topic_evolution(
         topic_idx,
         n_components,
@@ -49,7 +50,8 @@ def topic_evolution(
         end_year=2019,
         all_topics=False,
         use_topic_names=False,
-        output=''):
+        output='',
+        output_figsize=None):
     """
     Look at the change in topic prevalence over time.
     """
@@ -77,7 +79,10 @@ def topic_evolution(
         nrows = (W.shape[1] + 3) // 4
         ncols = 4
         last_row_min_idx = 4 * (nrows - 1)
-        _, axs = plt.subplots(nrows=nrows, ncols=ncols)
+        if output_figsize:
+            _, axs = plt.subplots(nrows=nrows, ncols=ncols, figsize=output_figsize)
+        else:
+            _, axs = plt.subplots(nrows=nrows, ncols=ncols)
         plt.rcParams.update({'font.size': 10})
         plt.tight_layout()
         #plt.suptitle("Prevalence of Topics Over Time")
@@ -111,6 +116,8 @@ def topic_evolution(
                 show_xlabel=show_xlabel,
                 tight=True
             )
+        for i in set(range(len(axs))) - set(range(W.shape[1])):
+            axs[i].axis('off')
     else:
         W_series = pd.Series(W[:, topic_idx])
         W_series.name = 'topic_loadings'
