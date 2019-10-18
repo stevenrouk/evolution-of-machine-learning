@@ -1,4 +1,4 @@
-# Steven Rouk, Capstone 2 - The Evolution of Machine Learning
+# Steven Rouk - The Evolution of Machine Learning
 
 _Analysis of the evolution of the field of machine learning as discovered through natural language processing (NLP) techniques applied to research papers on [arXiv.org](https://arxiv.org/)._
 
