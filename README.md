@@ -356,66 +356,23 @@ Without much tuning, I got an accuracy of almost 90% on unseen data (89.4%)—pr
 
 ### Differentiating Terms for Macro Subjects
 
-**Which words distinguish CS from Math?**
-
-| words |
-| --- |
-| algorithm |
-| data |
-| network |
-| based |
-| information |
-| proposed |
-| channel |
-| systems |
-| networks |
-| used |
-| algorithms |
-| each |
-| performance |
-| approach |
-| present |
-
-**Which words distinguish Math from CS?**
-
-| words |
-| --- |
-| prove |
-| space |
-| group |
-| theory |
-| finite |
-| function |
-| give |
-| result |
-| functions |
-| g |
-| algebra |
-| equation |
-| equations |
-| class |
-| x |
-
-**Which words distinguish Statistics from Math?**
-
-| words |
-| --- |
-| data |
-| models |
-| methods |
-| analysis |
-| approach |
-| based |
-| algorithm |
-| distribution |
-| proposed |
-| regression |
-| used |
-| statistical |
-| estimation |
-| bayesian |
-| use |
-| more |
+| CS, but not Math | Math, but not CS | Statistics, but not Math |
+| --- | --- | --- |
+| algorithm | prove | data |
+| data | space | models |
+| network | group | methods |
+| based | theory | analysis |
+| information | finite | approach |
+| proposed | function | based |
+| channel | give | algorithm |
+| systems | result | distribution |
+| networks | functions | proposed |
+| used | g | regression |
+| algorithms | algebra | used |
+| each | equation | statistical |
+| performance | equations | estimation |
+| approach | class | bayesian |
+| present | x | use |
 
 ### K-Means Clustering and t-SNE
 
