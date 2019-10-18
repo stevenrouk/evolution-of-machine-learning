@@ -1,8 +1,5 @@
+import click
 import os
-import sys
-sys.path.append(os.path.abspath('.'))
-sys.path.append(os.path.abspath('..'))
-
 import re
 import time
 
@@ -50,22 +47,17 @@ def get_resumption_token(response_text):
 def make_name_file_safe(filename):
     return "".join([c for c in filename if c.isalpha() or c.isdigit() or c==' ']).rstrip()
 
+@click.group()
+def cli():
+    pass
 
-if __name__ == "__main__":
-    # # Get first API request and write to file
-    # print('Getting first url')
-    # url = build_first_call_url()
-    # output_filename = make_name_file_safe(f'FIRST') + '.xml'
-    # output_filepath = os.path.join(DATA_DIRECTORY_RAW, output_filename)
-    # r = requests.get(url)
-    # with open(output_filepath, 'w', encoding='utf-8') as f:
-    #     f.write(r.text)
-
-    # # Get resumption token
-    # resumption_token = get_resumption_token(r.text)
-
-    resumption_token = '3923570|591001'
-
+@cli.command()
+@click.option('--resumption-token', default='', help='The next resumption token to use in the API calls.')
+def start_data_pull(resumption_token=''):
+    """
+    Starts a long-running data pull process that pulls data from arXiv.org
+    until there is no more resumption token.
+    """
     # while we have a resumption token, get API request and write to file
     # if we need to wait, wait
     try:
@@ -108,6 +100,22 @@ if __name__ == "__main__":
         # if anything fails, write the resumption token that failed to a file
         print(e)
         with open('failed_token.txt', 'a') as f:
+            f.write('\n')
             f.write(resumption_token)
-    
-    import pdb; pdb.set_trace()
+
+if __name__ == "__main__":
+    # # Get first API request and write to file
+    # print('Getting first url')
+    # url = build_first_call_url()
+    # output_filename = make_name_file_safe(f'FIRST') + '.xml'
+    # output_filepath = os.path.join(DATA_DIRECTORY_RAW, output_filename)
+    # r = requests.get(url)
+    # with open(output_filepath, 'w', encoding='utf-8') as f:
+    #     f.write(r.text)
+
+    # # Get resumption token
+    # resumption_token = get_resumption_token(r.text)
+
+    #resumption_token = '3923570|591001'
+
+    cli()
