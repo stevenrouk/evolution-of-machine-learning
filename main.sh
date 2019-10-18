@@ -1,5 +1,7 @@
 ##########################################################
 ### Script demonstrating the flow of the full project. ###
+###                                                    ###
+### (Eventually want to move these into a make file.)  ###
 ##########################################################
 
 # Pull data from API (note, this takes a very long time)
