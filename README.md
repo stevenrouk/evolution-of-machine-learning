@@ -433,10 +433,11 @@ Not only was this project interesting from a technical perspective, but I was in
 
 Here are some ideas for future research in this area:
 
-1. Identify which papers were the most ahead of their time (and possibly influential), in that they directly predated a surge of interest in an area.
-2. Analyze the distribution of authors of papers as it relates to topics.
-3. Create a better predictive model. Potentially try to predict sub-categories (such as the "subjects" field categories).
-4. Look at which terms differentiate various topics from each other. I did this for macro subjects, but would be interested in applying this technique to subfields of machine learning.
+1. Bring in information about citation networks to see which papers are most cited, and how the topics of those papers are related to the overall evolution of the topic distributions I discovered.
+2. Identify which papers were the most ahead of their time (and possibly influential), in that they directly predated a surge of interest in an area.
+3. Analyze the distribution of authors of papers as it relates to topics.
+4. Create a better predictive model. Potentially try to predict sub-categories (such as the "subjects" field categories).
+5. Look at which terms differentiate various topics from each other. I did this for macro subjects, but would be interested in applying this technique to subfields of machine learning.
 
 ## Appendix #1: Technologies & Techniques Used
 
