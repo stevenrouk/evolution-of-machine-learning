@@ -346,58 +346,64 @@ Without much tuning, I got an accuracy of almost 90% on unseen data (89.4%)—pr
 
 **Which words distinguish CS from Math?**
 
-algorithm      10358    3213
-data            8356    3962
-network         7863     714
-based           7459    5744
-information     6939    1512
-proposed        5701    2212
-channel         5639     207
-systems         5609    6862
-networks        5574     705
-used            5515    4652
-algorithms      5510    1206
-each            5101    5816
-performance     5002     563
-approach        4813    5035
-present         4665    6363
+| words |
+| --- |
+| algorithm |
+| data |
+| network |
+| based |
+| information |
+| proposed |
+| channel |
+| systems |
+| networks |
+| used |
+| algorithms |
+| each |
+| performance |
+| approach |
+| present |
 
 **Which words distinguish Math from CS?**
 
-prove           2409   18691
-space           2388   16510
-group           1102   16219
-theory          2724   13431
-finite          2187   12338
-function        3098   11883
-give            2087   11460
-result          2961   11126
-functions       2267   10933
-g               1390   10733
-algebra          473   10530
-equation         453   10267
-equations        701    9818
-class           2355    9681
-x                971    9461
+| words |
+| --- |
+| prove |
+| space |
+| group |
+| theory |
+| finite |
+| function |
+| give |
+| result |
+| functions |
+| g |
+| algebra |
+| equation |
+| equations |
+| class |
+| x |
 
 **Which words distinguish Statistics from Math?**
 
-data            1778    3962
-models           954    5163
-methods          698    3845
-analysis         550    4081
-approach         550    5035
-based            550    5744
-algorithm        541    3213
-distribution     539    4741
-proposed         490    2212
-regression       473     794
-used             464    4652
-statistical      463    1140
-estimation       453    1157
-bayesian         435     326
-use              384    5760
-more             378    5377
+| words |
+| --- |
+| data |
+| models |
+| methods |
+| analysis |
+| approach |
+| based |
+| algorithm |
+| distribution |
+| proposed |
+| regression |
+| used |
+| statistical |
+| estimation |
+| bayesian |
+| use |
+| more |
 
 ### K-Means Clustering and t-SNE
 
