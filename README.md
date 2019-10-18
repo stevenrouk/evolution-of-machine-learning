@@ -17,7 +17,7 @@ _Analysis of the evolution of the field of machine learning as discovered throug
 6. [Conclusion](#conclusion)
 7. [Future Research](#future-research)
 8. [Appendix #1: Technologies & Techniques Used](#appendix-1-technologies--techniques-used)
-8. [Appendix #2: Project Organization](#appendix-2-project-organization)
+9. [Appendix #2: Project Organization](#appendix-2-project-organization)
 
 ## Motivation
 
