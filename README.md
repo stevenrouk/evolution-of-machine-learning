@@ -318,7 +318,23 @@ Most Similar Papers:
 
 We can also create a simple research paper recommender system based on the papers that people are interested in. Given a research paper that someone enjoyed (or maybe they didn't enjoy it, but they need to learn more about the topic anyway), we can return other similar papers.
 
-_(results description TBD)_
+For example, what are the closest papers to "Evolving controllers for simulated car racing"?
+
+```
+Original Paper:
+
+**************************************************
+>>> Evolving controllers for simulated car racing
+**************************************************
+
+Most Similar Papers:
+
+>>> N2N Learning: Network to Network Compression via Policy Gradient Reinforcement Learning
+>>> Neural Network Memory Architectures for Autonomous Robot Navigation
+>>> Learning by Stimulation Avoidance: A Principle to Control Spiking Neural Networks Dynamics
+>>> Efficient Architecture Search by Network Transformation
+>>> Deep Recurrent Q-Learning vs Deep Q-Learning on a simple Partially Observable Markov Decision Process with Minecraft
+```
 
 ### Macro Subject Predictor
 
