@@ -53,11 +53,28 @@ def cli():
 
 @cli.command()
 @click.option('--resumption-token', default='', help='The next resumption token to use in the API calls.')
-def start_data_pull(resumption_token=''):
+@click.option('--full-pull', is_flag=True, default=False)
+def start_data_pull(resumption_token='', full_pull=False):
     """
     Starts a long-running data pull process that pulls data from arXiv.org
     until there is no more resumption token.
     """
+    # If there's no resumption token, assume that we want to pull all the data
+    # starting at the beginning. We'll do the first API call separately, get the
+    # resumption token, and then start the main loop.
+    # Get first API request and write to file
+    if not resumption_token and full_pull:
+        print('Getting first url')
+        url = build_first_call_url()
+        output_filename = make_name_file_safe(f'FIRST') + '.xml'
+        output_filepath = os.path.join(DATA_DIRECTORY_RAW, output_filename)
+        r = requests.get(url)
+        with open(output_filepath, 'w', encoding='utf-8') as f:
+            f.write(r.text)
+
+        # Get resumption token from first page for use in the next API call
+        resumption_token = get_resumption_token(r.text)
+
     # while we have a resumption token, get API request and write to file
     # if we need to wait, wait
     try:
@@ -104,18 +121,4 @@ def start_data_pull(resumption_token=''):
             f.write(resumption_token)
 
 if __name__ == "__main__":
-    # # Get first API request and write to file
-    # print('Getting first url')
-    # url = build_first_call_url()
-    # output_filename = make_name_file_safe(f'FIRST') + '.xml'
-    # output_filepath = os.path.join(DATA_DIRECTORY_RAW, output_filename)
-    # r = requests.get(url)
-    # with open(output_filepath, 'w', encoding='utf-8') as f:
-    #     f.write(r.text)
-
-    # # Get resumption token
-    # resumption_token = get_resumption_token(r.text)
-
-    #resumption_token = '3923570|591001'
-
     cli()
