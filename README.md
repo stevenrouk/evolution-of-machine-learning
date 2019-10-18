@@ -215,9 +215,20 @@ Here are some of the most interesting findings:
 
 ### 20 Topics
 
-Some other interesting topics show up if we use 20 topics.
+Some other interesting topics show up if we use 20 topics. Here were some of the additional topics that came out of using an NMF model with 20 topics:
 
-_(results description TBD)_
+- matrices
+- feature selection
+- kernel methods / Hilbert space
+- NLP
+- domain adaptation / transfer learning
+- audio / speech recognition
+
+<img src="images/all-boxplots-20-topics.png">
+
+<sub><b></b> Change in Topic Loading Distributions Over Time </sub>
+
+It's interesting to see which of these topics have exploded in recent years (e.g. anything related to neural nets), and which went through swells and declines (e.g. matrices, kernels).
 
 ### One Topic Per Year
 
