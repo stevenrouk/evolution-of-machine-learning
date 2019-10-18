@@ -38,7 +38,7 @@ Just for a bit of perspective:
 
 And keep in mind that thirty years ago, most homes in the US didn't have a personal computer. Ten years ago, most people in the US weren't using smartphones. These days, the computing power available to the average person is astronomically more than was available in previous years, which is democratizing access to the computing power needed to accomplish incredible technological feats using data. As one article puts it, thanks to Moore's Law ["Your smartphone is millions of times more powerful than all of NASA’s combined computing in 1969"](https://www.zmescience.com/research/technology/smartphone-power-compared-to-apollo-432/).
 
-Whereas previously you needed supercomputers and teams of researchers to create algorithms even capable of recognizing hand-written digits, these days millions of people have the computing power needed to create sophisticated facial recognition algorithms. (And for those who don't posess the computing power on their personal machines, they can simply purchase it through platforms like [AWS](https://aws.amazon.com/machine-learning/).) And according to Google search volume, people are taking notice.
+Whereas previously you needed supercomputers and teams of researchers to create algorithms even capable of recognizing hand-written digits, these days millions of people have the computing power needed to create sophisticated facial recognition algorithms. (And for those who don't possess the computing power on their personal machines, they can simply purchase it through platforms like [AWS](https://aws.amazon.com/machine-learning/).) And according to Google search volume, people are taking notice.
 
 <img src="images/google_trends_machine_learning.png" alt="Google Trends Machine Learning">
 
@@ -46,7 +46,7 @@ Whereas previously you needed supercomputers and teams of researchers to create 
 
 ### A Rapidly Evolving Field
 
-With this kind of quickly changing technological landscape, I was curious as to characteristics of machine learning and how those have changed over the last few decades. As a data scientist and machine learning practitioner, I'm constantly looking for ways to better understand the field and keep up with developments. If I could find a way to analyze the recent trajectory of machine learning, I would be in a better place from which to put it to good use.
+With this kind of quickly changing technological landscape, I was curious as to the characteristics of machine learning and how those have changed over the last few decades. As a data scientist and machine learning practitioner, I'm constantly looking for ways to better understand the field and keep up with developments. If I could find a way to analyze the recent trajectory of machine learning, I would be in a better place from which to put it to good use.
 
 ## The Data
 
@@ -90,7 +90,7 @@ What I was really interested in was the research papers specifically related to 
 
 <sub><b></b> Machine Learning Paper Subjects </sub>
 
-Although the two subjects with "machine learning" in them are at the top of the list (which we would expect), the subsequent top subjects give us some view into what various sub-fields of machine learning might be: computer vision, language, optimization, robotics, etc.
+Although the two subjects with "machine learning" in them are at the top of the list (which we would expect), the subsequent top subjects give us some view into what various subfields of machine learning might be: computer vision, language, optimization, robotics, etc.
 
 This subset of over 48,000 paper descriptions was the corpus that I worked with after this point.
 
@@ -110,7 +110,7 @@ And, fittingly, this underscores the need for applying techniques like machine l
 
 ## Topic Modeling
 
-The heart of the analysis involving using the natural language processing (NLP) technique of topic modeling to discover latent topics in the corpus of research paper descriptions. (Note: I didn't include the paper titles in my model, although I did display them as part of the analysis of my topics.) By using topic modeling to understand the research papers, I was essentially trying to discover cohesive sub-fields of machine learning. I used the technique of non-negative matrix factorization (NMF) to accomplish this.
+The heart of the analysis involving using the natural language processing (NLP) technique of topic modeling to discover latent topics in the corpus of research paper descriptions. (Note: I didn't include the paper titles in my model, although I did display them as part of the analysis of my topics.) By using topic modeling to understand the research papers, I was essentially trying to discover cohesive subfields of machine learning. I used the technique of non-negative matrix factorization (NMF) to accomplish this.
 
 ### Text Featurization and Model Hyperparameters
 
@@ -321,11 +321,11 @@ K-means is considered a "hard clustering" algorithm because, unlike topic modeli
 
 Cluster 1 (the orange cluster isolated in the top of the graph) relates to reinforcement learning and robotics, Cluster 0 (dark blue in bottom left) relates to graphs and graph machine learning, and Cluster 9 (light blue in bottom center) relates to clustering.
 
-(Note: The one data point way out there in the bottom left had a blank desription, which accounts for it being so different from the other papers.)
+(Note: The one data point way out there in the bottom left had a blank description, which accounts for it being so different from the other papers.)
 
 ## Conclusion
 
-Not only was this project interesting from a technical perspective, but I was incredibly curious about the results of the analysis as well because of my work in data science and machine learning. Through the application of NLP techniques, I've created a handy tool for myself (and hopefully a useful analysis for others!) to serve as a guide for various topics and sub-fields of machine learning. (I know I'll be diving more into neural networks in the coming months—something I've been intending to do for a while anyway.) I've also rekindled an interest in keeping up with the latest research papers coming out.
+Not only was this project interesting from a technical perspective, but I was incredibly curious about the results of the analysis as well because of my work in data science and machine learning. Through the application of NLP techniques, I've created a handy tool for myself (and hopefully a useful analysis for others!) to serve as a guide for various topics and subfields of machine learning. (I know I'll be diving more into neural networks in the coming months—something I've been intending to do for a while anyway.) I've also rekindled an interest in keeping up with the latest research papers coming out.
 
 ## Future Research
 
@@ -334,7 +334,7 @@ Here are some ideas for future research in this area:
 1. Identify which papers were the most ahead of their time (and possibly influential), in that they directly predated a surge of interest in an area.
 2. Analyze the distribution of authors of papers as it relates to topics.
 3. Create a better predictive model. Potentially try to predict sub-categories (such as the "subjects" field categories).
-4. Look at which terms differentiate various topics from each other. I did this for macro subjects, but would be interested in applying this technique to sub-fields of machine learning.
+4. Look at which terms differentiate various topics from each other. I did this for macro subjects, but would be interested in applying this technique to subfields of machine learning.
 
 ## Appendix #1: Technologies & Techniques Used
 
