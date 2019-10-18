@@ -84,27 +84,11 @@ def topic_documents(n_components=10, topic_idx=0, n_documents=5, title_only=Fals
     """
     Print the most relevant documents for each latent topic.
     """
-    model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_{n_components}_model.pkl')
-    vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
     weights_filename = os.path.join(MODELS_DIRECTORY, f'nmf_{n_components}_weights_W.pkl')
 
-    if not os.path.exists(model_filename):
-        print("model doesn't exist")
-        return
-    if not os.path.exists(vectorizer_filename):
-        print("vectorizer doesn't exist")
-        return
     if not os.path.exists(weights_filename):
         print("weights file doesn't exist")
         return
-
-    print('loading model')
-    with open(model_filename, 'rb') as f:
-        nmf_model = pickle.load(f)
-
-    print('loading vectorizer')
-    with open(vectorizer_filename, 'rb') as f:
-        tfidf_vectorizer = pickle.load(f)
     
     print('loading weights')
     with open(weights_filename, 'rb') as f:
