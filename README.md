@@ -11,17 +11,13 @@ _Analysis of the evolution of the field of machine learning as discovered throug
 ## Table of Contents
 1. [Motivation](#motivation)
 2. [The Data](#the-data)
-3. [Graph Theory Terminology](#graph-theory-terminology)
-4. [Representing the Data Computationally](#representing-the-data-computationally)
-5. [Questions & Answers](#questions--answers)
-    * [Who's the most connected? (Max Degree: In-Degree and Out-Degree)](#whos-the-most-connected-max-degree-in-degree-and-out-degree)
-    * [How many distinct networks are there? (Component Analysis)](#how-many-distinct-networks-are-there-component-analysis)
-    * [Who's friendly, and who's gossipy? (Sharing Reciprocity)](#whos-friendly-and-whos-gossipy-sharing-reciprocity)
-    * [If you start at a random subreddit, where do you end up? (Random Walk Analysis)](#if-you-start-at-a-random-subreddit-where-do-you-end-up-random-walk-analysis)
-    * [How do we visualize massive graphs? (Big Graph Data Visualization: Random Node Sampling)](#how-do-we-visualize-massive-graphs-big-graph-data-visualization-random-node-sampling)
-6. [Future Research](#future-research)
-7. [Technologies & Techniques Used](#technologies--techniques-used)
-8. [Gallery](#gallery)
+3. [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
+4. [Topic Modeling](#topic-modeling)
+5. [Other Interesting Findings](#other-interesting-findings)
+6. [Conclusion](#conclusion)
+7. [Future Research](#future-research)
+8. [Appendix #1: Technologies & Techniques Used](#technologies--techniques-used)
+8. [Appendix #2: Project Organization](#gallery)
 
 ## Motivation
 
