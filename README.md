@@ -245,9 +245,7 @@ Without much tuning, I got an accuracy of almost 90% on unseen data (89.4%)—pr
 
 ### Differentiating Terms for Macro Subjects
 
-(insert here—words that are diff between math and CS, for example.)
-
-Which words distinguish CS from Math?
+**Which words distinguish CS from Math?**
 
 algorithm      10358    3213
 data            8356    3962
@@ -265,7 +263,7 @@ performance     5002     563
 approach        4813    5035
 present         4665    6363
 
-Which words distinguish Math from CS?
+**Which words distinguish Math from CS?**
 
 prove           2409   18691
 space           2388   16510
@@ -283,9 +281,7 @@ equations        701    9818
 class           2355    9681
 x                971    9461
 
-
-Which words distinguish Statistics from Math?
-
+**Which words distinguish Statistics from Math?**
 
 data            1778    3962
 models           954    5163
@@ -306,7 +302,15 @@ more             378    5377
 
 ### K-Means Clustering and t-SNE
 
-(insert here)
+K-means is considered a "hard clustering" algorithm because, unlike topic modeling using NMF, data points can only belong to one cluster. K-means clustering revealed fairly similar cluster topics to NMF. Plotting the two-dimensional t-SNE representation of the clusters (using a randomly sampled subset of the data) reveals that some clusters are much more distinct than others.
+
+<img src="images/kmeans_clustering.png">
+
+<sub><b></b> t-SNE representation of K-Means Clusters </sub>
+
+Cluster 1 (the orange cluster isolated in the top of the graph) relates to reinforcement learning and robotics, Cluster 0 (dark blue in bottom left) relates to graphs and graph machine learning, and Cluster 9 (light blue in bottom center) relates to clustering.
+
+(Note: The one data point way out there in the bottom left had a blank desription, which accounts for it being so different from the other papers.)
 
 ## Conclusion
 
