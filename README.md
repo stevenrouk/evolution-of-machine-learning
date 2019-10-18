@@ -42,7 +42,11 @@ Just for a bit of perspective:
 
 And keep in mind that thirty years ago, most homes in the US didn't have a personal computer. Ten years ago, most people in the US weren't using smartphones. These days, the computing power available to the average person is astronomically more than was available in previous years, which is democratizing access to the computing power needed to accomplish incredible technological feats using data. As one article puts it, thanks to Moore's Law ["Your smartphone is millions of times more powerful than all of NASA’s combined computing in 1969"](https://www.zmescience.com/research/technology/smartphone-power-compared-to-apollo-432/).
 
-Whereas previously you needed supercomputers and teams of researchers to create algorithms even capable of recognizing hand-written digits, these days millions of people have the computing power needed to create sophisticated facial recognition algorithms. (And for those who don't posess the computing power on their personal machines, they can simply purchase it through platforms like [AWS](https://aws.amazon.com/machine-learning/).)
+Whereas previously you needed supercomputers and teams of researchers to create algorithms even capable of recognizing hand-written digits, these days millions of people have the computing power needed to create sophisticated facial recognition algorithms. (And for those who don't posess the computing power on their personal machines, they can simply purchase it through platforms like [AWS](https://aws.amazon.com/machine-learning/).) And according to Google search volume, people are taking notice.
+
+<img src="images/google_trends_machine_learning.png" alt="Google Trends Machine Learning">
+
+<sub><b></b> [Google Trends](https://trends.google.com/trends/explore?date=all&geo=US&q=%2Fm%2F01hyh_) - Machine Learning Search Volume </sub>
 
 ### A Rapidly Evolving Field
 
@@ -201,17 +205,49 @@ And here's what it looks like when we highlight the words in this paper that are
 
 And now, we're at a place where we can answer one of the original questions I was wondering about what I started this project: how has the field of machine learning changed over time? Armed with our ten topics and a fairly good understanding of what these topics represent, we can see how these topics have evolved over the last 20 years.
 
+<img src="images/topic_evolution_10/topic_0_evolution.png" alt="document words analyzed by color">
 
+<sub><b></b> **machine learning / time series:** Change in Topic Loading Distributions Over Time </sub>
 
+<img src="images/topic_evolution_10/topic_1_evolution.png" alt="document words analyzed by color">
 
+<sub><b></b> **gradient / optimization / convergence:** Change in Topic Loading Distributions Over Time </sub>
 
+<img src="images/topic_evolution_10/topic_2_evolution.png" alt="document words analyzed by color">
 
+<sub><b></b> **neural networks / deep learning:** Change in Topic Loading Distributions Over Time </sub>
 
+<img src="images/topic_evolution_10/topic_3_evolution.png" alt="document words analyzed by color">
 
+<sub><b></b> **reinforcement learning:** Change in Topic Loading Distributions Over Time </sub>
 
+<img src="images/topic_evolution_10/topic_4_evolution.png" alt="document words analyzed by color">
 
+<sub><b></b> **variational bayesian:** Change in Topic Loading Distributions Over Time </sub>
 
+<img src="images/topic_evolution_10/topic_5_evolution.png" alt="document words analyzed by color">
 
+<sub><b></b> **graphs / graph ML:** Change in Topic Loading Distributions Over Time </sub>
+
+<img src="images/topic_evolution_10/topic_6_evolution.png" alt="document words analyzed by color">
+
+<sub><b></b> **ML attacks / GANs:** Change in Topic Loading Distributions Over Time </sub>
+
+<img src="images/topic_evolution_10/topic_7_evolution.png" alt="document words analyzed by color">
+
+<sub><b></b> **image / text / classification:** Change in Topic Loading Distributions Over Time </sub>
+
+<img src="images/topic_evolution_10/topic_8_evolution.png" alt="document words analyzed by color">
+
+<sub><b></b> **clustering:** Change in Topic Loading Distributions Over Time </sub>
+
+<img src="images/topic_evolution_10/topic_9_evolution.png" alt="document words analyzed by color">
+
+<sub><b></b> **algorithms / regret / optimization:** Change in Topic Loading Distributions Over Time </sub>
+
+Here are some of the most interesting findings:
+
+1. 
 
 
 
