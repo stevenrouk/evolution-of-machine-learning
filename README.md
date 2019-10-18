@@ -23,6 +23,10 @@ _Analysis of the evolution of the field of machine learning as discovered throug
 
 ### A Brief History
 
+<img src="images/deep_blue.jpeg">
+
+<sub><b></b> Deep Blue Playing Garry Kasparov </sub>
+
 It's no overstatement to say that machine learning—and data science more broadly—is revolutionizing our society.
 
 Just for a bit of perspective:
@@ -37,6 +41,10 @@ Just for a bit of perspective:
 - In 2018, an NLP AI by Alibaba outperformed Stanford students on a reading and comprehension test, and Google releases "Duplex", an AI assistant with an incredibly human-like voice that can make reservations for you.
 
 And keep in mind that thirty years ago, most homes in the US didn't have a personal computer. Ten years ago, most people in the US weren't using smartphones. These days, the computing power available to the average person is astronomically more than was available in previous years, which is democratizing access to the computing power needed to accomplish incredible technological feats using data. As one article puts it, thanks to Moore's Law ["Your smartphone is millions of times more powerful than all of NASA’s combined computing in 1969"](https://www.zmescience.com/research/technology/smartphone-power-compared-to-apollo-432/).
+
+<img src="images/homemade_self_driving_car.jpg">
+
+<sub><b></b> Deep Blue Playing Garry Kasparov </sub>
 
 Whereas previously you needed supercomputers and teams of researchers to create algorithms even capable of recognizing hand-written digits, these days millions of people have the computing power needed to create sophisticated facial recognition algorithms. (And for those who don't possess the computing power on their personal machines, they can simply purchase it through platforms like [AWS](https://aws.amazon.com/machine-learning/).) And according to Google search volume, people are taking notice.
 
