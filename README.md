@@ -247,9 +247,11 @@ And now, we're at a place where we can answer one of the original questions I wa
 
 Here are some of the most interesting findings:
 
-1. 
+1. The explosion of interest in neural networks and deep learning. These models have been responsible for much of the news-worthy progress we've seen in the last few years, and these approaches are becoming more feasible with time and computing power increases and we figure out how to leverage GPUs for much faster processing of matrices.
+2. The growth of the GAN / ML attack category. It would take a little more teasing apart to see which of those two areas was most responsible for this growth, although both topics have seen more interest in recent years. (And GANs were only invented in 2014.)
+2. The subtle downturn of topics like optimization, clustering, and a few other topics.
 
-
+<img src="images/test-all-boxplots.png">
 
 
 
