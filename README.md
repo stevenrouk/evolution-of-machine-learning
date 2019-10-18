@@ -217,25 +217,25 @@ Here are some of the most interesting findings:
 
 Some other interesting topics show up if we use 20 topics.
 
-(insert results here)
+_(results description TBD)_
 
 ### One Topic Per Year
 
 If we restrict ourselves to only one latent topic, and we run a model for every year since 2000, some interesting results show up. It appears that 2019 is the year of the graph!
 
-(insert results here)
+_(results description TBD)_
 
 ### Querying Loadings
 
 What if we ask the question, "which paper is most closely aligned with a certain combination of topics?" For example, we might be interested in the paper that is most purely about graph ML and not much else. We can query our results by specifying the loading combination we're interested in and seeing which document is closest (via cosine similarity) to that query:
 
-(insert results here)
+_(results description TBD)_
 
 ### Paper Recommender
 
 We can also create a simple research paper recommender system based on the papers that people are interested in. Given a research paper that someone enjoyed (or maybe they didn't enjoy it, but they need to learn more about the topic anyway), we can return other similar papers.
 
-(insert results here)
+_(results description TBD)_
 
 ### Macro Subject Predictor
 
