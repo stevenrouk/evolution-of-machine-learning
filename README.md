@@ -230,17 +230,89 @@ Some other interesting topics show up if we use 20 topics. Here were some of the
 
 It's interesting to see which of these topics have exploded in recent years (e.g. anything related to neural nets), and which went through swells and declines (e.g. matrices, kernels).
 
-### One Topic Per Year
+### Three Topics Per Year
 
-If we restrict ourselves to only one latent topic, and we run a model for every year since 2000, some interesting results show up. It appears that 2019 is the year of the graph!
+If we restrict ourselves to only three latent topics, and we run a model for every year since 2000, some interesting results show up. Following are the words for the three topics for all years between 2000 and 2019. It appears that 2019 is the year of the graph!
 
-_(results description TBD)_
+| 2000 | 2001 |
+| --- | --- |
+| data information learning fuzzy model systems noise complexity modeling theory | sentences corpus algorithm parts constituents ovis information et al atis |
+| aixi formally problem universal tl solves distribution theory agent sequence | random study stable laws roots turn harmonic leads matrices polynomials |
+| spam mail naive filters filter performance bayesian keyword anti patterns | policy learning observable based value partially domains mu data approach |
+
+| 2002 | 2003 |
+| --- | --- |
+| keyphrases genex 97 task algorithm document generated experiments c4 set | prediction mu xi nu bayes sequence environments l_ universal based |
+| context problem strategies training domain weather domains set features sensitive | learning information algorithm control chances semantic function problem em data |
+| learning data algorithm bias semantic information algorithms orientation accuracy using | controller neural genetic failure safe free algorithms hybrid pendulum inverted |
+
+| 2004 | 2005 |
+| --- | --- |
+| learning time algorithm models markov function paper series based method | prediction loss class benchmark bound observations algorithm mdl forecasting space |
+| mdl prediction universal bayes classes convergence class loss sequence countable | distributed models information algorithm network learning classification model neural technique |
+| semantic information distribution similarity mutual level content data applications hylos | experts expert master actions adversary universal specify algorithm problems algorithms |
+
+| 2006 | 2007 |
+| --- | --- |
+| learning method data algorithm approach model based user using results | model learning algorithm distribution complexity generalization random problem error prediction |
+| stochastic languages rational dees ma automata study class probabilistic multiplicity | technique cover adopted 1a1 1aa land svms mapping classification approaches |
+| prediction strategy loss strategies class universal continuous line measures stationary | data analysis clustering methods method variables parameters number real sparse |
+
+| 2008 | 2009 |
+| --- | --- |
+| lasso model models selection variables regression estimator sample random dimensional | learning data algorithm algorithms model based method time new problem |
+| data clustering algorithms points network networks quantum results model proposed | regression selection linear kernel variables lasso dimensional models sparse model |
+| learning algorithm method classification kernel problem performance methods information task | matrix rank entries algorithm low problem matrices completion subset collaborative |
+
+| 2010 | 2011 |
+| --- | --- |
+| method classification data kernel feature sparse features regression based methods | data learning model clustering models based approach method classification kernel |
+| clustering data model models graph inference latent graphical networks clusters | regret policy learning online optimal algorithm problem reward bandit bounds |
+| learning algorithm problem regret online algorithms functions policy function bounds | matrix rank sparse norm lasso low recovery convex problem optimization |
+
+| 2012 | 2013 |
+| --- | --- |
+| sparse problem algorithm optimization convex matrix problems function algorithms convergence | model models bayesian data inference variables parameters approach latent likelihood |
+| models model bayesian inference variables latent structure network networks data | matrix algorithm problem sparse convex rank optimization bounds algorithms convergence |
+| data learning classification feature based clustering method features methods proposed | learning data classification features training methods feature clustering algorithms method |
+
+| 2014 | 2015 |
+| --- | --- |
+| algorithm learning algorithms optimization problem function problems stochastic bounds optimal | data model models clustering inference method methods based bayesian approach |
+| model data models network learning networks features classification training deep | deep neural networks learning network training convolutional image model tasks |
+| matrix rank clustering low data norm completion sparse matrices algorithm | algorithm convex optimization problem algorithms matrix problems stochastic learning function |
+
+| 2016 | 2017 |
+| --- | --- |
+| data model models method based methods learning approach kernel clustering | data model models learning approach method based methods graph features |
+| neural networks network deep learning training convolutional image tasks recurrent | algorithm gradient optimization algorithms stochastic problem convex convergence problems matrix |
+| algorithm optimization convex algorithms gradient convergence problem stochastic problems non | networks neural deep network training learning adversarial convolutional tasks image |
+
+| 2018 | 2019 |
+| --- | --- |
+| learning data model network deep neural models networks training based | data model models learning training network neural deep networks image |
+| algorithm gradient optimization algorithms problem function stochastic convergence convex problems | algorithm learning algorithms policy optimization problem gradient function optimal problems |
+| adversarial attacks examples attack training networks robustness perturbations gan generative | graph graphs node embedding nodes embeddings network representation structure networks |
 
 ### Querying Loadings
 
 What if we ask the question, "which paper is most closely aligned with a certain combination of topics?" For example, we might be interested in the paper that is most purely about graph ML and not much else. We can query our results by specifying the loading combination we're interested in and seeing which document is closest (via cosine similarity) to that query:
 
-_(results description TBD)_
+```
+Loadings:
+
+**************************************************
+>>> [[0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]]
+**************************************************
+
+Most Similar Papers:
+
+>>> Triple2Vec: Learning Triple Embeddings from Knowledge Graphs
+>>> Topology Based Scalable Graph Kernels
+>>> Fast Haar Transforms for Graph Neural Networks
+>>> Tripartite Heterogeneous Graph Propagation for Large-scale Social Recommendation
+>>> Are Powerful Graph Neural Nets Necessary? A Dissection on Graph Classification
+```
 
 ### Paper Recommender
 
