@@ -1,0 +1,8 @@
+<h1>Search results for {{ query }}</h1>
+<a href="{{ url_for('search') }}">Search Again</a>
+<hr>
+<ol>
+{% for index, row in data.iterrows() %}
+    <li><a href="{{ row['url'] }}" target="_blank">{{ row['title'] }}</a></li>
+{% endfor %}
+</ol>

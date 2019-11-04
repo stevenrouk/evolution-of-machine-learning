@@ -14,6 +14,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from forms import SearchForm
 from src.analysis.inspect_topics import softmax
 from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
+from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings
 
 FILE_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.join(os.path.split(FILE_DIRECTORY)[0], 'src')
@@ -99,7 +100,9 @@ def results():
 
     vec = tfidf_vectorizer.transform([query])
     loadings = nmf_model.transform(vec)
-    return str(loadings)
+    similar_doc_idxs = get_similar_doc_idxs_to_loadings(loadings, W)
+
+    return render_template('results.html', query=query, data=df.iloc[similar_doc_idxs[:10]])
 
 # With debug=True, Flask server will auto-reload 
 # when there are code changes
