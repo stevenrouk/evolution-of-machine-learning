@@ -3,22 +3,42 @@
     Paper Report
 {% endblock %}
 {% block head %}
+    {{ super() }}
 {% endblock %}
 {% block content %}
-    {% for k in data.index %}
-    {% if k == 'url' %}
-    <div><a href="{{ data[k] }}" target="_blank">{{ data[k] }}</a></div>
-    {% else %}
-    <div>{{ k }}: {{ data[k] }}</div>
-    {% endif %}
-    <hr>
-    {% endfor %}
-    <table>
+<div><a href="{{ url_for('report', paper_idx=data.name) }}">{{ data['title'] }}</a> (<a href="{{ data['url'] }}" target="_blank">arXiv.org</a>)</div>
+    <div class="container">
+        <div class="flex-item">
+            <div>category: {{ data['set_spec'] }}</div>
+            <div>subjects: {{ data['subjects'] }}</div>
+            <div>authors: {{ data['authors'] }}</div>
+            <div>date: {{ data['dates'] }}</div>
+        </div>
+        <!-- <div><a href="{{ url_for('report', paper_idx=data.name) }}">{{ data['title'] }}</a> (<a href="{{ data['url'] }}" target="_blank">arXiv.org</a>)</div>
+        <div>category: {{ data['set_spec'] }}</div>
+        <div>subjects: {{ data['subjects'] }}</div>
+        <div>authors: {{ data['authors'] }}</div>
+        <div>date: {{ data['dates'] }}</div> -->
+        <div class="flex-item">
+            <table>
+                {% for val in data['loadings'].round(3) %}
+                    <tr>
+                        <td>{{ topics[loop.index0] }}</td>
+                        <td>{{ val }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <!-- <table>
         {% for val in data['loadings'].round(3) %}
             <tr>
                 <td>{{ topics[loop.index0] }}</td>
                 <td>{{ val }}</td>
             </tr>
         {% endfor %}
-    </table>
+    </table> -->
+    <br>
+    <div>{{ data['description'] }}</div>
+    <hr>
 {% endblock %}
