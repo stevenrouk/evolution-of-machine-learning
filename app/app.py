@@ -88,7 +88,10 @@ def report():
 
     data = df.iloc[paper_idx]
     data['loadings'] = get_paper_loadings(data.name)
-    return render_template('report.html', data=data, topics=TOPIC_NAMES_LOOKUP[10])
+    similar_doc_idxs = get_similar_doc_idxs_to_loadings(data['loadings'].reshape(1, -1), W)
+    similar_doc_idxs = similar_doc_idxs[similar_doc_idxs != paper_idx]
+    similar_docs = df.iloc[similar_doc_idxs[:10]]
+    return render_template('report.html', data=data, topics=TOPIC_NAMES_LOOKUP[10], similar_documents=similar_docs)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

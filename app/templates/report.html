@@ -6,19 +6,15 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-<div><a href="{{ url_for('report', paper_idx=data.name) }}">{{ data['title'] }}</a> (<a href="{{ data['url'] }}" target="_blank">arXiv.org</a>)</div>
+<div><h1>{{ data['title'] }}</h1></div>
     <div class="container">
         <div class="flex-item">
+            <div>full paper: <a href="{{ data['url'] }}" target="_blank">{{ data['url'] }}</a></div>
             <div>category: {{ data['set_spec'] }}</div>
             <div>subjects: {{ data['subjects'] }}</div>
             <div>authors: {{ data['authors'] }}</div>
             <div>date: {{ data['dates'] }}</div>
         </div>
-        <!-- <div><a href="{{ url_for('report', paper_idx=data.name) }}">{{ data['title'] }}</a> (<a href="{{ data['url'] }}" target="_blank">arXiv.org</a>)</div>
-        <div>category: {{ data['set_spec'] }}</div>
-        <div>subjects: {{ data['subjects'] }}</div>
-        <div>authors: {{ data['authors'] }}</div>
-        <div>date: {{ data['dates'] }}</div> -->
         <div class="flex-item">
             <table>
                 {% for val in data['loadings'].round(3) %}
@@ -30,15 +26,16 @@
             </table>
         </div>
     </div>
-    <!-- <table>
-        {% for val in data['loadings'].round(3) %}
-            <tr>
-                <td>{{ topics[loop.index0] }}</td>
-                <td>{{ val }}</td>
-            </tr>
-        {% endfor %}
-    </table> -->
     <br>
     <div>{{ data['description'] }}</div>
+    <hr>
+    <h2>Similar Papers</h2>
+    <div>
+        <ol>
+            {% for index, row in similar_documents.iterrows() %}
+            <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
     <hr>
 {% endblock %}
