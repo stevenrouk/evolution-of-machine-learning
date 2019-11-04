@@ -2,6 +2,8 @@ import os
 import sys
 sys.path.append('.')
 
+import pickle
+
 import pandas as pd
 import psycopg2
 from psycopg2 import sql
@@ -29,6 +31,23 @@ cur = conn.cursor()
 # Read in data
 df = pd.read_csv(ML_ONLY_FILEPATH)
 
+# Load model
+model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_model.pkl')
+vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
+weights_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_weights_W.pkl')
+
+print('loading model')
+with open(model_filename, 'rb') as f:
+    nmf_model = pickle.load(f)
+
+print('loading vectorizer')
+with open(vectorizer_filename, 'rb') as f:
+    tfidf_vectorizer = pickle.load(f)
+
+print('loading weights')
+with open(weights_filename, 'rb') as f:
+    W = pickle.load(f)
+
 # Create Flask app
 app = Flask(__name__)
 
@@ -37,13 +56,23 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+def get_paper_loadings(idx):
+    #probs = softmax(W[paper_idx], temperature=0.01)
+    return W[idx]
+
 @app.route('/papers')
 def papers():
     page = request.args.get('page', type=int)
     if page:
-        return render_template('papers.html', data=df.iloc[(page-1)*20:page*20], page_num=page)
+        data = df.iloc[(page-1)*20:page*20]
+        page_num = page
+    else:
+        data = df.iloc[:20]
+        page_num = 1
     
-    return render_template('papers.html', data=df.iloc[:20], page_num=1)
+    data['loadings'] = list(map(get_paper_loadings, data.index))
+
+    return render_template('papers.html', data=data, page_num=page_num)
 
 @app.route('/data')
 def data():
