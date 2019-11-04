@@ -1,0 +1,16 @@
+<h1>Page {{ page_num }}</h1>
+{% if page_num > 1 %}
+<a href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a> | 
+{% endif %}
+<a href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
+<hr>
+{% for index, row in data.iterrows() %}
+    <div><a href="{{ row['url'] }}" target="_blank">{{ row['title'] }}</a></div>
+    <div>category: {{ row['set_spec'] }}</div>
+    <div>subjects: {{ row['subjects'] }}</div>
+    <div>authors: {{ row['authors'] }}</div>
+    <div>date: {{ row['dates'] }}</div>
+    <br>
+    <div>{{ row['description'] }}</div>
+    <hr>
+{% endfor %}

@@ -1,0 +1,8 @@
+{% for k in data.index %}
+{% if k == 'url' %}
+<div><a href="{{ data[k] }}" target="_blank">{{ data[k] }}</a></div>
+{% else %}
+<div>{{ k }}: {{ data[k] }}</div>
+{% endif %}
+<hr>
+{% endfor %}
