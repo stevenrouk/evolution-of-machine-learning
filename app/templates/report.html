@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}
+    Paper Report
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    {% for k in data.index %}
+    {% if k == 'url' %}
+    <div><a href="{{ data[k] }}" target="_blank">{{ data[k] }}</a></div>
+    {% else %}
+    <div>{{ k }}: {{ data[k] }}</div>
+    {% endif %}
+    <hr>
+    {% endfor %}
+    <table>
+        {% for val in data['loadings'].round(3) %}
+            <tr>
+                <td>{{ topics[loop.index0] }}</td>
+                <td>{{ val }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

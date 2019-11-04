@@ -1,8 +1,16 @@
-<h1>Machine Learning Research Paper Search</h1>
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.search(size=32) }}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+{% extends "layout.html" %}
+{% block title %}
+    Search
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <h1>Machine Learning Research Paper Search</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.search(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

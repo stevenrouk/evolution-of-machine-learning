@@ -67,21 +67,28 @@ def get_paper_loadings(idx):
 @app.route('/papers')
 def papers():
     page = request.args.get('page', type=int)
-    if page:
+    if page is not None and page > 0:
         data = df.iloc[(page-1)*20:page*20]
         page_num = page
+        if len(data) == 0:
+            return redirect(url_for('papers'))
     else:
         data = df.iloc[:20]
         page_num = 1
-    
+
     data['loadings'] = list(map(get_paper_loadings, data.index))
 
     return render_template('papers.html', data=data, page_num=page_num, topics=TOPIC_NAMES_LOOKUP[10])
 
-@app.route('/data')
-def data():
-    data = df.iloc[0]
-    return render_template('data.html', data=data)
+@app.route('/report')
+def report():
+    paper_idx = request.args.get('paper_idx', type=int)
+    if paper_idx is None:
+        return redirect(url_for('index'))
+
+    data = df.iloc[paper_idx]
+    data['loadings'] = get_paper_loadings(data.name)
+    return render_template('report.html', data=data, topics=TOPIC_NAMES_LOOKUP[10])
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

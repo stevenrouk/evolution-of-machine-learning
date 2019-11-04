@@ -1,24 +1,32 @@
-<h1>Page {{ page_num }}</h1>
-{% if page_num > 1 %}
-<a href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a> | 
-{% endif %}
-<a href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
-<hr>
-{% for index, row in data.iterrows() %}
-    <div><a href="{{ row['url'] }}" target="_blank">{{ row['title'] }}</a></div>
-    <div>category: {{ row['set_spec'] }}</div>
-    <div>subjects: {{ row['subjects'] }}</div>
-    <div>authors: {{ row['authors'] }}</div>
-    <div>date: {{ row['dates'] }}</div>
-    <table>
-        {% for val in row['loadings'].round(3) %}
-            <tr>
-                <td>{{ topics[loop.index0] }}</td>
-                <td>{{ val }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <div>{{ row['description'] }}</div>
+{% extends "layout.html" %}
+{% block title %}
+    All Papers
+{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+    <h1>Page {{ page_num }}</h1>
+    {% if page_num > 1 %}
+    <a href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a> | 
+    {% endif %}
+    <a href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
     <hr>
-{% endfor %}
+    {% for index, row in data.iterrows() %}
+        <div><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a> (<a href="{{ row['url'] }}" target="_blank">arXiv.org</a>)</div>
+        <div>category: {{ row['set_spec'] }}</div>
+        <div>subjects: {{ row['subjects'] }}</div>
+        <div>authors: {{ row['authors'] }}</div>
+        <div>date: {{ row['dates'] }}</div>
+        <table>
+            {% for val in row['loadings'].round(3) %}
+                <tr>
+                    <td>{{ topics[loop.index0] }}</td>
+                    <td>{{ val }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <div>{{ row['description'] }}</div>
+        <hr>
+    {% endfor %}
+{% endblock %}
