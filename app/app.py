@@ -9,7 +9,11 @@ import psycopg2
 from psycopg2 import sql
 import numpy as np
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+
+from forms import SearchForm
+from src.analysis.inspect_topics import softmax
+from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
 
 FILE_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.join(os.path.split(FILE_DIRECTORY)[0], 'src')
@@ -50,15 +54,14 @@ with open(weights_filename, 'rb') as f:
 
 # Create Flask app
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'secret-key'
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 def get_paper_loadings(idx):
-    #probs = softmax(W[paper_idx], temperature=0.01)
-    return W[idx]
+    return W[idx] / sum(W[idx])
 
 @app.route('/papers')
 def papers():
@@ -72,12 +75,31 @@ def papers():
     
     data['loadings'] = list(map(get_paper_loadings, data.index))
 
-    return render_template('papers.html', data=data, page_num=page_num)
+    return render_template('papers.html', data=data, page_num=page_num, topics=TOPIC_NAMES_LOOKUP[10])
 
 @app.route('/data')
 def data():
     data = df.iloc[0]
     return render_template('data.html', data=data)
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+    if form.validate_on_submit():
+        #return redirect(url_for('index'))
+        #return form.search.data
+        return redirect(url_for('results', query=form.search.data))
+    return render_template('search.html', form=form)
+
+@app.route('/results')
+def results():
+    query = request.args.get('query', type=str)
+    if not query:
+        return redirect(url_for('search'))
+
+    vec = tfidf_vectorizer.transform([query])
+    loadings = nmf_model.transform(vec)
+    return str(loadings)
 
 # With debug=True, Flask server will auto-reload 
 # when there are code changes
