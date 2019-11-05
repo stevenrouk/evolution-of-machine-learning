@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}
+    Paper Report
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.css" rel="stylesheet">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- {{ svg|safe }} -->
+{{ plot_div|safe }}
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+{{ plot_script|safe }}
+{% endblock %}

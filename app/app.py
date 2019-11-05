@@ -4,6 +4,7 @@ sys.path.append('.')
 
 import pickle
 
+from bokeh.embed import components
 import pandas as pd
 import psycopg2
 from psycopg2 import sql
@@ -15,6 +16,9 @@ from forms import SearchForm
 from src.analysis.inspect_topics import softmax
 from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
 from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings
+from src.visualization.bokeh_demo import get_bokeh_plot
+from src.visualization.scatter_plot import get_two_topic_scatterplot
+from src.visualization.box_plot import get_boxplot, get_boxplot_demo
 
 FILE_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.join(os.path.split(FILE_DIRECTORY)[0], 'src')
@@ -57,12 +61,15 @@ with open(weights_filename, 'rb') as f:
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 
+
+def get_paper_loadings(idx):
+    return W[idx] / sum(W[idx])
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-def get_paper_loadings(idx):
-    return W[idx] / sum(W[idx])
 
 @app.route('/papers')
 def papers():
@@ -80,6 +87,7 @@ def papers():
 
     return render_template('papers.html', data=data, page_num=page_num, topics=TOPIC_NAMES_LOOKUP[10])
 
+
 @app.route('/report')
 def report():
     paper_idx = request.args.get('paper_idx', type=int)
@@ -93,6 +101,7 @@ def report():
     similar_docs = df.iloc[similar_doc_idxs[:10]]
     return render_template('report.html', data=data, topics=TOPIC_NAMES_LOOKUP[10], similar_documents=similar_docs)
 
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
@@ -101,6 +110,7 @@ def search():
         #return form.search.data
         return redirect(url_for('results', query=form.search.data))
     return render_template('search.html', form=form)
+
 
 @app.route('/results')
 def results():
@@ -114,7 +124,55 @@ def results():
 
     return render_template('results.html', query=query, data=df.iloc[similar_doc_idxs[:10]])
 
-# With debug=True, Flask server will auto-reload 
+
+@app.route('/topic-comparison')
+def topic_comparison():
+    return render_template('topic-comparison.html')
+
+
+@app.route('/bokeh-demo')
+def bokeh_demo():
+    plot = get_bokeh_plot()
+    script, div = components(plot)
+    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+
+
+@app.route('/bokeh-scatter-plot')
+def bokeh_scatter_plot():
+    plot = get_two_topic_scatterplot(W[:, 0], W[:, 2])
+    script, div = components(plot)
+    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+
+
+@app.route('/tsne')
+def tsne():
+    with open(os.path.join(MODELS_DIRECTORY, 'tsne_10_weights_W.pkl'), 'rb') as f:
+        W_tsne = pickle.load(f)
+    plot = get_two_topic_scatterplot(W_tsne[:, 0], W_tsne[:, 1])
+    script, div = components(plot)
+    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+
+
+@app.route('/boxplot-demo')
+def boxplot_demo():
+    plot = get_boxplot_demo()
+    script, div = components(plot)
+    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+
+
+@app.route('/boxplot')
+def boxplot():
+    plot = get_boxplot()
+    script, div = components(plot)
+    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+
+
+@app.route('/change-over-time')
+def change_over_time():
+    return "Need to implement."
+
+
+# With debug=True, Flask server will auto-reload
 # when there are code changes
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)

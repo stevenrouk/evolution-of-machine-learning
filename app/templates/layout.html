@@ -7,7 +7,7 @@
     {% endblock %}
   </head>
   <body>
-    <div>The Evolution of Machine Learning | <a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('search') }}">Search</a> | <a href="{{ url_for('papers') }}">All Papers</a></div>
+    <div><a href="{{ url_for('index') }}">The Evolution of Machine Learning</a> | <a href="{{ url_for('change_over_time') }}">Change Over Time</a> | <a href="{{ url_for('search') }}">Search</a> | <a href="{{ url_for('papers') }}">All Papers</a> | <a href="{{ url_for('topic_comparison') }}">Topic Comparisons</a></div>
     <hr>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
