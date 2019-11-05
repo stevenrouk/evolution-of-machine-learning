@@ -18,7 +18,7 @@ from src.analysis.inspect_topics import softmax
 from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
 from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings
 from src.visualization.bokeh_demo import get_bokeh_plot
-from src.visualization.scatter_plot import get_two_topic_scatterplot
+from src.visualization.scatter_plot import get_two_topic_scatterplot, get_tsne_scatterplot
 from src.visualization.box_plot import get_boxplot, get_boxplot_demo
 
 FILE_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
@@ -167,6 +167,11 @@ def topic_comparison():
     return render_template('topic-comparison.html')
 
 
+@app.route('/data-visualizations')
+def data_visualizations():
+    return render_template('list-of-data-visualizations.html')
+
+
 @app.route('/bokeh-demo')
 def bokeh_demo():
     plot = get_bokeh_plot()
@@ -176,7 +181,11 @@ def bokeh_demo():
 
 @app.route('/bokeh-scatter-plot')
 def bokeh_scatter_plot():
-    plot = get_two_topic_scatterplot(W[:, 0], W[:, 2])
+    df = pd.DataFrame({
+        'x': W[:, 0],
+        'y': W[:, 1]
+        })
+    plot = get_two_topic_scatterplot(df, 'x', 'y')
     script, div = components(plot)
     return render_template('data-visualization.html', plot_div=div, plot_script=script)
 
@@ -196,9 +205,21 @@ def bokeh_small_scatter_plot():
 
 @app.route('/tsne')
 def tsne():
+    topic_idx = request.args.get('topic_idx', type=int)
     with open(os.path.join(MODELS_DIRECTORY, 'tsne_10_weights_W.pkl'), 'rb') as f:
         W_tsne = pickle.load(f)
-    plot = get_two_topic_scatterplot(W_tsne[:, 0], W_tsne[:, 1])
+    if topic_idx is not None:
+        pass
+    else:
+        topic_idx = 0
+    loadings = W[:, topic_idx]
+    df = pd.DataFrame({
+        'x': W_tsne[:, 0],
+        'y': W_tsne[:, 1],
+        'topic_loadings': loadings
+        })
+    title = f"Points colored by how much they belong to the \"{TOPIC_NAMES_LOOKUP[10][topic_idx]}\" category"
+    plot = get_tsne_scatterplot(df, 'x', 'y', title=title, color_col='topic_loadings')
     script, div = components(plot)
     return render_template('data-visualization.html', plot_div=div, plot_script=script)
 

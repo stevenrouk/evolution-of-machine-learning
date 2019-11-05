@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}
+    Search
+{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>List of Data Visualization Pages</h1>
+    <p>This is a running list of current data visualizations.</p>
+    <ol>
+        <li><a href="{{ url_for('bokeh_demo') }}">Bokeh Demo</a></li>
+        <li><a href="{{ url_for('bokeh_scatter_plot') }}">Bokeh Scatter Plot</a></li>
+        <li><a href="{{ url_for('bokeh_small_scatter_plot') }}">Small Bokeh Scatter Plot</a></li>
+        <li><a href="{{ url_for('tsne') }}">t-SNE Plot</a></li>
+        <li><a href="{{ url_for('boxplot_demo') }}">Boxplot Demo</a></li>
+        <li><a href="{{ url_for('boxplot') }}">Boxplot</a></li>
+        <li><a href="{{ url_for('change_over_time') }}">Change Over Time</a></li>
+    </ol>
+{% endblock %}

@@ -41,7 +41,7 @@ def get_colors(x):
     #         line_color=None)
 
 
-def get_two_topic_scatterplot(df, x_col, y_col):
+def get_two_topic_scatterplot(df, x_col, y_col, color_col=None):
     # df.cyl = df.cyl.astype(str)
     # df.yr = df.yr.astype(str)
 
@@ -56,12 +56,15 @@ def get_two_topic_scatterplot(df, x_col, y_col):
     #p.scatter(df.mpg, df.hp)
     x = df[x_col].values
     y = df[y_col].values
-    colors = get_colors(x)
+    if not color_col:
+        colors = get_colors(x)
+    else:
+        colors = get_colors(df[color_col])
     df['color'] = colors
     p.scatter(x=x_col, y=y_col, radius=1.5, fill_alpha=0.5, fill_color='color', source=df)
 
-    p.xgrid.grid_line_color = None
-    p.xaxis.axis_label = "Manufacturer grouped by # Cylinders"
+    # p.xgrid.grid_line_color = None
+    # p.xaxis.axis_label = "Manufacturer grouped by # Cylinders"
     p.xaxis.major_label_orientation = 1.2
 
     # index_cmap = factor_cmap('cyl_mfr', palette=['#2b83ba', '#abdda4', '#ffffbf', '#fdae61', '#d7191c'], 
@@ -74,3 +77,41 @@ def get_two_topic_scatterplot(df, x_col, y_col):
     # p.add_tools(HoverTool(tooltips=[("MPG", "@mpg_mean"), ("Cyl, Mfr", "@cyl_mfr")]))
 
     return p
+
+def get_tsne_scatterplot(df, x_col, y_col, title=None, color_col=None):
+    # df.cyl = df.cyl.astype(str)
+    # df.yr = df.yr.astype(str)
+
+    # group = df.groupby(by=['cyl', 'mfr'])
+    # source = ColumnDataSource(group)
+
+    p = figure(title=title)
+
+    # p = figure(plot_width=800, plot_height=800, title="Mean MPG by # Cylinders and Manufacturer",
+    #         x_range=group, toolbar_location=None, tools="")
+    
+    #p.scatter(df.mpg, df.hp)
+    x = df[x_col].values
+    y = df[y_col].values
+    if not color_col:
+        colors = get_colors(x)
+    else:
+        colors = get_colors(df[color_col])
+    df['color'] = colors
+    p.scatter(x=x_col, y=y_col, radius=1, fill_alpha='topic_loadings', line_alpha=0, fill_color='color', source=df)
+
+    # p.xgrid.grid_line_color = None
+    # p.xaxis.axis_label = "Manufacturer grouped by # Cylinders"
+    p.xaxis.major_label_orientation = 1.2
+
+    # index_cmap = factor_cmap('cyl_mfr', palette=['#2b83ba', '#abdda4', '#ffffbf', '#fdae61', '#d7191c'], 
+    #                         factors=sorted(df.cyl.unique()), end=1)
+
+    # p.vbar(x='cyl_mfr', top='mpg_mean', width=1, source=source,
+    #     line_color="white", fill_color=index_cmap, 
+    #     hover_line_color="darkgrey", hover_fill_color=index_cmap)
+
+    # p.add_tools(HoverTool(tooltips=[("MPG", "@mpg_mean"), ("Cyl, Mfr", "@cyl_mfr")]))
+
+    return p
+

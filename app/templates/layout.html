@@ -7,7 +7,7 @@
     {% endblock %}
   </head>
   <body>
-    <div><a href="{{ url_for('index') }}">The Evolution of Machine Learning</a> | <a href="{{ url_for('change_over_time') }}">Change Over Time</a> | <a href="{{ url_for('search') }}">Search</a> | <a href="{{ url_for('get_text_loadings') }}">Text Search</a> | <a href="{{ url_for('papers') }}">All Papers</a> | <a href="{{ url_for('topic_comparison') }}">Topic Comparisons</a> | <a href="{{ url_for('get_random_paper') }}">Random ML Paper</a></div>
+    <div><a href="{{ url_for('index') }}">The Evolution of Machine Learning</a> | <a href="{{ url_for('change_over_time') }}">Change Over Time</a> | <a href="{{ url_for('search') }}">Search</a> | <a href="{{ url_for('get_text_loadings') }}">Text Search</a> | <a href="{{ url_for('papers') }}">All Papers</a> | <a href="{{ url_for('topic_comparison') }}">Topic Comparisons</a> | <a href="{{ url_for('get_random_paper') }}">Random ML Paper</a> | <a href="{{ url_for('data_visualizations') }}">Data Visualizations</a></div>
     <hr>
     <div id="content">{% block content %}{% endblock %}</div>
     <hr>
