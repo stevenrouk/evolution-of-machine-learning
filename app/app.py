@@ -20,6 +20,7 @@ from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings
 from src.visualization.bokeh_demo import get_bokeh_plot
 from src.visualization.scatter_plot import get_two_topic_scatterplot, get_tsne_scatterplot
 from src.visualization.box_plot import get_boxplot, get_boxplot_demo
+from src.visualization.bar_chart import get_barchart
 
 FILE_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.join(os.path.split(FILE_DIRECTORY)[0], 'src')
@@ -237,6 +238,42 @@ def boxplot():
 @app.route('/change-over-time')
 def change_over_time():
     return render_template('change-over-time.html')
+
+
+@app.route('/how-topics-are-defined')
+def how_topics_are_defined():
+    features = np.array(tfidf_vectorizer.get_feature_names())
+    H = nmf_model.components_
+
+    topic_names = TOPIC_NAMES_LOOKUP[10]
+    top_words = []
+    word_loadings = []
+
+    for i, row in enumerate(H):
+        top = np.argsort(row)[::-1][:30]
+        top_words.append(features[top])
+        word_loadings.append(H[i, top])
+
+    scripts = []
+    divs = []
+    for i in range(10):
+        data = pd.DataFrame({
+            'x': top_words[i],
+            'y': word_loadings[i]
+            })
+        plot = get_barchart(data, 'x', 'y', title=topic_names[i])
+        script, div = components(plot)
+        scripts.append(script)
+        divs.append(div)
+
+    return render_template(
+        'how-topics-are-defined.html',
+        topic_names=topic_names,
+        top_words=top_words,
+        word_loadings=word_loadings,
+        scripts=scripts,
+        divs=divs,
+    )
 
 
 # With debug=True, Flask server will auto-reload

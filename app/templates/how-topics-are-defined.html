@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block title %}
+    How Topics Are Defined
+{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>How Topics Are Defined</h1>
+    <table>
+        {% for topic in topic_names %}
+            <div class="container">
+                <!-- <div class="flex-item">
+                    {{ topic }}
+                </div> -->
+                <div class="flex-item">
+                    {{ divs[loop.index0]|safe }}
+                    {{ scripts[loop.index0]|safe }}
+                </div>
+            </div>
+            <!-- {% if loop.index0 % 3 == 0 %}
+            <tr>
+            {% endif %}
+            <table>
+                <tr>
+                    <td>{{ topic }}</td>
+                    <td>
+                        {{ divs[loop.index0]|safe }}
+                        {{ scripts[loop.index0]|safe }}
+                    </td>
+                </tr>
+            </table>
+            {% if loop.index0 % 3 == 2 or loop.last %}
+            </tr>
+            {% endif %} -->
+        {% endfor %}
+    </table>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+{% endblock %}
