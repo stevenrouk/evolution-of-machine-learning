@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}
-    Paper Report
+    t-SNE Graph of All Papers
 {% endblock %}
 {% block head %}
     {{ super() }}
@@ -12,9 +12,12 @@
 
 <form action="{{ url_for('tsne') }}" method="GET">
     <select name="topic_idx">
-        <option value="{{topic_idxs[0]}}" selected>{{topic_idxs[0]}}</option>
-        {% for idx in topic_idxs[1:] %}
+        {% for idx in topic_idxs %}
+            {% if topic_idx == idx %}
+            <option value="{{idx}}" selected>{{idx}}</option>
+            {% else %}
             <option value="{{idx}}">{{idx}}</option>
+            {% endif %}
         {% endfor %}
     </select>
     <input type="submit">
