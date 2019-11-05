@@ -162,11 +162,6 @@ def results():
     return render_template('results.html', query=query, data=df.iloc[similar_doc_idxs[:10]])
 
 
-@app.route('/topic-comparison')
-def topic_comparison():
-    return render_template('topic-comparison.html')
-
-
 @app.route('/data-visualizations')
 def data_visualizations():
     return render_template('list-of-data-visualizations.html')
@@ -240,7 +235,7 @@ def boxplot():
 
 @app.route('/change-over-time')
 def change_over_time():
-    return "Need to implement."
+    return render_template('change-over-time.html')
 
 
 # With debug=True, Flask server will auto-reload
