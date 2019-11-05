@@ -216,7 +216,7 @@ def tsne():
     title = f"Points colored by how much they belong to the \"{TOPIC_NAMES_LOOKUP[10][topic_idx]}\" category"
     plot = get_tsne_scatterplot(df, 'x', 'y', title=title, color_col='topic_loadings')
     script, div = components(plot)
-    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+    return render_template('tsne.html', plot_div=div, plot_script=script, topic_idxs=range(10))
 
 
 @app.route('/boxplot-demo')
