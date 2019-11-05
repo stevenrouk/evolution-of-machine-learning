@@ -10,6 +10,7 @@ import pandas as pd
 import psycopg2
 from psycopg2 import sql
 import numpy as np
+import matplotlib.cm as cm
 
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -261,7 +262,12 @@ def how_topics_are_defined():
             'x': top_words[i],
             'y': word_loadings[i]
             })
-        plot = get_barchart(data, 'x', 'y', title=topic_names[i])
+        color = cm.Set3.colors[i]
+        color = tuple(round(c * 255) for c in color)
+        hover_fill_color = tuple(abs(c - 40) for c in color)
+        color = '#%02x%02x%02x' % color
+        hover_fill_color = '#%02x%02x%02x' % hover_fill_color
+        plot = get_barchart(data, 'x', 'y', title=topic_names[i], bar_color=color, hover_fill_color=hover_fill_color)
         script, div = components(plot)
         scripts.append(script)
         divs.append(div)

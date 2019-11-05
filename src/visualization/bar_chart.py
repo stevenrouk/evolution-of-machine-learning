@@ -3,8 +3,9 @@ from bokeh.models import ColumnDataSource, HoverTool
 from bokeh.plotting import figure
 from bokeh.sampledata.autompg import autompg_clean as df
 from bokeh.transform import factor_cmap
+import matplotlib.cm as cm
 
-def get_barchart(df, x_col, y_col, title):
+def get_barchart(df, x_col, y_col, title, bar_color, hover_fill_color):
     p = figure(plot_width=800, plot_height=300, title=title,
                x_range=df[x_col], toolbar_location=None, tools="")
 
@@ -16,8 +17,8 @@ def get_barchart(df, x_col, y_col, title):
     #                         factors=sorted(df.cyl.unique()), end=1)
 
     p.vbar(x=x_col, top=y_col, width=1, source=df,
-           line_color='white', fill_color='black',
-           hover_line_color='darkgrey', hover_fill_color='lightgrey')
+           line_color='black', fill_color=bar_color,
+           hover_line_color='black', hover_fill_color=hover_fill_color)
 
     # p.vbar(x='cyl_mfr', top='mpg_mean', width=1, source=source,
     #     line_color="white", fill_color=index_cmap, 
