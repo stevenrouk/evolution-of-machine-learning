@@ -112,6 +112,7 @@ def get_tsne_scatterplot(df, x_col, y_col, title=None, color_col=None):
     #     hover_line_color="darkgrey", hover_fill_color=index_cmap)
 
     # p.add_tools(HoverTool(tooltips=[("MPG", "@mpg_mean"), ("Cyl, Mfr", "@cyl_mfr")]))
+    p.add_tools(HoverTool(tooltips=[("Titles", "@titles")]))
 
     return p
 

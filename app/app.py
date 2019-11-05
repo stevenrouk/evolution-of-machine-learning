@@ -176,11 +176,11 @@ def bokeh_demo():
 
 @app.route('/bokeh-scatter-plot')
 def bokeh_scatter_plot():
-    df = pd.DataFrame({
+    data = pd.DataFrame({
         'x': W[:, 0],
         'y': W[:, 1]
         })
-    plot = get_two_topic_scatterplot(df, 'x', 'y')
+    plot = get_two_topic_scatterplot(data, 'x', 'y')
     script, div = components(plot)
     return render_template('data-visualization.html', plot_div=div, plot_script=script)
 
@@ -189,11 +189,11 @@ def bokeh_scatter_plot():
 def bokeh_small_scatter_plot():
     with open(os.path.join(MODELS_DIRECTORY, 'tsne_10_weights_W.pkl'), 'rb') as f:
         W_tsne = pickle.load(f)
-    df = pd.DataFrame({
+    data = pd.DataFrame({
         'x': W_tsne[:, 0][:100],
         'y': W_tsne[:, 1][:100]
         })
-    plot = get_two_topic_scatterplot(df, 'x', 'y')
+    plot = get_two_topic_scatterplot(data, 'x', 'y')
     script, div = components(plot)
     return render_template('data-visualization.html', plot_div=div, plot_script=script)
 
@@ -208,13 +208,14 @@ def tsne():
     else:
         topic_idx = 0
     loadings = W[:, topic_idx]
-    df = pd.DataFrame({
+    data = pd.DataFrame({
         'x': W_tsne[:, 0],
         'y': W_tsne[:, 1],
-        'topic_loadings': loadings
+        'topic_loadings': loadings,
+        'titles': df['title']
         })
     title = f"Points colored by how much they belong to the \"{TOPIC_NAMES_LOOKUP[10][topic_idx]}\" category"
-    plot = get_tsne_scatterplot(df, 'x', 'y', title=title, color_col='topic_loadings')
+    plot = get_tsne_scatterplot(data, 'x', 'y', title=title, color_col='topic_loadings')
     script, div = components(plot)
     return render_template('tsne.html', plot_div=div, plot_script=script, topic_idxs=range(10), topic_idx=topic_idx)
 
