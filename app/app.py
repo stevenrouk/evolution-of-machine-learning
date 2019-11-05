@@ -3,6 +3,7 @@ import sys
 sys.path.append('.')
 
 import pickle
+import random
 
 from bokeh.embed import components
 import pandas as pd
@@ -69,6 +70,11 @@ def get_paper_loadings(idx):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/get-random-paper')
+def get_random_paper():
+    return redirect(url_for('report', paper_idx=random.choice(df.index)))
 
 
 @app.route('/papers')
@@ -140,6 +146,19 @@ def bokeh_demo():
 @app.route('/bokeh-scatter-plot')
 def bokeh_scatter_plot():
     plot = get_two_topic_scatterplot(W[:, 0], W[:, 2])
+    script, div = components(plot)
+    return render_template('data-visualization.html', plot_div=div, plot_script=script)
+
+
+@app.route('/bokeh-small-scatter-plot')
+def bokeh_small_scatter_plot():
+    with open(os.path.join(MODELS_DIRECTORY, 'tsne_10_weights_W.pkl'), 'rb') as f:
+        W_tsne = pickle.load(f)
+    df = pd.DataFrame({
+        'x': W_tsne[:, 0][:100],
+        'y': W_tsne[:, 1][:100]
+        })
+    plot = get_two_topic_scatterplot(df, 'x', 'y')
     script, div = components(plot)
     return render_template('data-visualization.html', plot_div=div, plot_script=script)
 
