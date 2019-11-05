@@ -13,7 +13,7 @@ import numpy as np
 
 from flask import Flask, render_template, request, redirect, url_for
 
-from forms import SearchForm
+from forms import SearchForm, BigSearchForm
 from src.analysis.inspect_topics import softmax
 from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
 from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings
@@ -63,8 +63,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 
 
+def normalize_paper_loadings(loadings):
+    return loadings / sum(loadings)
+
+
 def get_paper_loadings(idx):
-    return W[idx] / sum(W[idx])
+    #return W[idx] / sum(W[idx])
+    return normalize_paper_loadings(W[idx])
 
 
 @app.route('/')
@@ -112,10 +117,36 @@ def report():
 def search():
     form = SearchForm()
     if form.validate_on_submit():
-        #return redirect(url_for('index'))
-        #return form.search.data
         return redirect(url_for('results', query=form.search.data))
     return render_template('search.html', form=form)
+
+
+@app.route('/get-text-loadings', methods=['GET', 'POST'])
+def get_text_loadings():
+    form = BigSearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('loadings_results', query=form.search.data))
+    return render_template('get-text-loadings.html', form=form)
+
+
+@app.route('/loadings-results')
+def loadings_results():
+    query = request.args.get('query', type=str)
+    if not query:
+        return redirect(url_for('get_text_loadings'))
+
+    vec = tfidf_vectorizer.transform([query])
+    loadings = nmf_model.transform(vec)
+    similar_doc_idxs = get_similar_doc_idxs_to_loadings(loadings, W)
+    normalized_loadings = normalize_paper_loadings(loadings[0])
+
+    return render_template(
+        'text-loadings-results.html',
+        query=query,
+        topics=TOPIC_NAMES_LOOKUP[10],
+        loadings=normalized_loadings,
+        similar_docs=df.iloc[similar_doc_idxs[:10]]
+    )
 
 
 @app.route('/results')

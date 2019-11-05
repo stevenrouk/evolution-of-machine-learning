@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}
+    Results - {{ query }}
+{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1>Search results</h1>
+    <a href="{{ url_for('get_text_loadings') }}">Search Again</a>
+    <div class="container">
+        <div class="flex-item">
+            <p><i>Query: {{ query }}</i></p>
+        </div>
+        <div class="flex-item">
+            <table>
+                {% for val in loadings.round(3) %}
+                    <tr>
+                        <td>{{ topics[loop.index0] }}</td>
+                        <td>{{ val }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <hr>
+    <h2>Similar Papers</h2>
+    <ol>
+    {% for index, row in similar_docs.iterrows() %}
+        <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a> (<a href="{{ row['url'] }}" target="_blank">arXiv.org</a>)</li>
+    {% endfor %}
+    </ol>
+{% endblock %}
