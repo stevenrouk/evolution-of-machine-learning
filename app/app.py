@@ -86,7 +86,10 @@ def index():
 
 @app.route('/get-random-paper')
 def get_random_paper():
-    return redirect(url_for('report', paper_idx=random.choice(df.index)))
+    cur.execute('SELECT identifier FROM papers;')
+    ids = cur.fetchall()
+    random_id = random.choice(ids)[0]
+    return redirect(url_for('report', paper_id=random_id))
 
 
 @app.route('/papers')
@@ -108,9 +111,11 @@ def papers():
 
 @app.route('/report')
 def report():
-    paper_idx = request.args.get('paper_idx', type=int)
-    if paper_idx is None:
+    paper_id = request.args.get('paper_id', type=str)
+    if paper_id is None:
         return redirect(url_for('index'))
+
+    paper_idx = df[df['identifier'] == paper_id].index[0]
 
     data = df.iloc[paper_idx]
     data['loadings'] = get_paper_loadings(data.name)
