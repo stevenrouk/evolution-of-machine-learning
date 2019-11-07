@@ -10,8 +10,8 @@
     <a href="{{ url_for('search') }}">Search Again</a>
     <hr>
     <ol>
-    {% for index, row in data.iterrows() %}
-        <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a> (<a href="{{ row['url'] }}" target="_blank">arXiv.org</a>)</li>
-    {% endfor %}
+        {% for index, row in similar_documents_tfidf.iterrows() %}
+        <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+        {% endfor %}
     </ol>
 {% endblock %}

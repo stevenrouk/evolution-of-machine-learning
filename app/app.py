@@ -186,7 +186,16 @@ def results():
     loadings = nmf_model.transform(vec)
     similar_doc_idxs = get_similar_doc_idxs_to_loadings(loadings, W)
 
-    return render_template('results.html', query=query, data=df.iloc[similar_doc_idxs[:10]])
+    # Get similar docs by tfidf
+    tfidf_similar_doc_idxs = get_similar_doc_idxs_to_tfidf(vec, tfidf_corpus)
+    tfidf_similar_docs = df.iloc[tfidf_similar_doc_idxs[:10]]
+
+    return render_template(
+        'results.html',
+        query=query,
+        data=df.iloc[similar_doc_idxs[:10]],
+        similar_documents_tfidf=tfidf_similar_docs
+    )
 
 
 @app.route('/data-visualizations')
