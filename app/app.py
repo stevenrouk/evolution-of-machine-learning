@@ -84,6 +84,16 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/new')
+def index_new():
+    return render_template('index-new.html')
+
+
+@app.route('/blog-example')
+def blog_example():
+    return render_template('blog-example.html')
+
+
 @app.route('/get-random-paper')
 def get_random_paper():
     return redirect(url_for('report', paper_idx=random.choice(df.index)))
