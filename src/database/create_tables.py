@@ -7,5 +7,15 @@ conn = psycopg2.connect(database="capstone2",
 cur = conn.cursor()
 
 # Create tables
-cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+cur.execute("""
+    CREATE TABLE papers
+    (identifier TEXT,
+    url TEXT,
+    title TEXT,
+    set_spec TEXT,
+    subjects TEXT,
+    authors TEXT,
+    dates TEXT,
+    description TEXT);
+""")
 conn.commit()
