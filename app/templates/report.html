@@ -29,13 +29,26 @@
     <br>
     <div>{{ data['description'] }}</div>
     <hr>
-    <h2>Similar Papers</h2>
-    <div>
-        <ol>
-            {% for index, row in similar_documents.iterrows() %}
-            <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
-            {% endfor %}
-        </ol>
+    <div class="container">
+        <div class="flex-item">
+            <h2>Similar Papers - By Terms</h2>
+            <div>
+                <ol>
+                    {% for index, row in similar_documents_tfidf.iterrows() %}
+                    <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <div class="flex-item">
+            <h2>Similar Papers - By Topics</h2>
+            <div>
+                <ol>
+                    {% for index, row in similar_documents.iterrows() %}
+                    <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
     </div>
-    <hr>
 {% endblock %}

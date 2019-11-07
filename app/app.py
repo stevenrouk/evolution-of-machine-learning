@@ -17,7 +17,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from forms import SearchForm, BigSearchForm
 from src.analysis.inspect_topics import softmax
 from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
-from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings
+from src.analysis.document_similarities import get_similar_doc_idxs_to_loadings, get_similar_doc_idxs_to_tfidf
 from src.visualization.bokeh_demo import get_bokeh_plot
 from src.visualization.scatter_plot import get_two_topic_scatterplot, get_tsne_scatterplot
 from src.visualization.box_plot import get_boxplot, get_boxplot_demo
@@ -43,10 +43,11 @@ cur = conn.cursor()
 # Read in data
 df = pd.read_csv(ML_ONLY_FILEPATH)
 
-# Load model
+# Load model and associated files
 model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_model.pkl')
 vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
 weights_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_weights_W.pkl')
+tfidf_vectorized_corpus_filename = os.path.join(MODELS_DIRECTORY, f'tfidf_vectorized_corpus.pkl')
 
 print('loading model')
 with open(model_filename, 'rb') as f:
@@ -59,6 +60,10 @@ with open(vectorizer_filename, 'rb') as f:
 print('loading weights')
 with open(weights_filename, 'rb') as f:
     W = pickle.load(f)
+
+print('loading tf-idf vectorized corpus')
+with open(tfidf_vectorized_corpus_filename, 'rb') as f:
+    tfidf_corpus = pickle.load(f)
 
 # Create Flask app
 app = Flask(__name__)
@@ -109,10 +114,24 @@ def report():
 
     data = df.iloc[paper_idx]
     data['loadings'] = get_paper_loadings(data.name)
+
+    # Get similar docs by loadings
     similar_doc_idxs = get_similar_doc_idxs_to_loadings(data['loadings'].reshape(1, -1), W)
     similar_doc_idxs = similar_doc_idxs[similar_doc_idxs != paper_idx]
     similar_docs = df.iloc[similar_doc_idxs[:10]]
-    return render_template('report.html', data=data, topics=TOPIC_NAMES_LOOKUP[10], similar_documents=similar_docs)
+
+    # Get similar docs by tfidf
+    tfidf_similar_doc_idxs = get_similar_doc_idxs_to_tfidf(tfidf_corpus[paper_idx], tfidf_corpus)
+    tfidf_similar_doc_idxs = tfidf_similar_doc_idxs[tfidf_similar_doc_idxs != paper_idx]
+    tfidf_similar_docs = df.iloc[tfidf_similar_doc_idxs[:10]]
+
+    return render_template(
+        'report.html',
+        data=data,
+        topics=TOPIC_NAMES_LOOKUP[10],
+        similar_documents=similar_docs,
+        similar_documents_tfidf=tfidf_similar_docs
+    )
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -137,17 +156,23 @@ def loadings_results():
     if not query:
         return redirect(url_for('get_text_loadings'))
 
+    # Get similar docs by loadings
     vec = tfidf_vectorizer.transform([query])
     loadings = nmf_model.transform(vec)
     similar_doc_idxs = get_similar_doc_idxs_to_loadings(loadings, W)
     normalized_loadings = normalize_paper_loadings(loadings[0])
+
+    # Get similar docs by tfidf
+    tfidf_similar_doc_idxs = get_similar_doc_idxs_to_tfidf(vec, tfidf_corpus)
+    tfidf_similar_docs = df.iloc[tfidf_similar_doc_idxs[:10]]
 
     return render_template(
         'text-loadings-results.html',
         query=query,
         topics=TOPIC_NAMES_LOOKUP[10],
         loadings=normalized_loadings,
-        similar_docs=df.iloc[similar_doc_idxs[:10]]
+        similar_docs=df.iloc[similar_doc_idxs[:10]],
+        similar_documents_tfidf=tfidf_similar_docs
     )
 
 
