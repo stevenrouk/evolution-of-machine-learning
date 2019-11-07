@@ -24,9 +24,9 @@ def parse_record(record):
     url = record.find('dc:identifier').text
     title = record.find('dc:title').text
     set_spec = record.find('setSpec').text
-    subjects = ','.join([sub.text for sub in record.find_all('dc:subject')])
-    authors = ','.join([aut.text for aut in record.find_all('dc:creator')])
-    dates = ','.join([d.text for d in record.find_all('dc:date')])
+    subjects = '-----'.join([sub.text for sub in record.find_all('dc:subject')])
+    authors = '-----'.join([aut.text for aut in record.find_all('dc:creator')])
+    dates = '-----'.join([d.text for d in record.find_all('dc:date')])
     description = record.find('dc:description').text
 
     return [identifier, url, title, set_spec, subjects, authors, dates, description]

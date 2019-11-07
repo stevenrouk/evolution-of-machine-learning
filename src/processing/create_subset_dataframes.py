@@ -23,4 +23,3 @@ if __name__ == "__main__":
     df_ml = df[df['subjects'].str.lower().str.contains('machine learning')]
     df_ml.to_csv(os.path.join(DATA_DIRECTORY_PROCESSED, 'machine_learning_only.csv'), index=False, encoding='utf-8')
     print("success")
-
