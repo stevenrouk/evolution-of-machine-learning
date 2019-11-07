@@ -1,7 +1,6 @@
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-from psycopg2.errors import DuplicateDatabase
 
 conn = psycopg2.connect(dbname='postgres',
     user='postgres', host='localhost', port='5435')
@@ -15,5 +14,5 @@ try:
     cur.execute(
         sql.SQL("CREATE DATABASE {}").format(sql.Identifier('capstone2'))
     )
-except DuplicateDatabase:
+except psycopg2.errors.DuplicateDatabase:
     print('database already exists')
