@@ -82,16 +82,6 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/new')
-def index_new():
-    return render_template('index-new.html')
-
-
-@app.route('/layout-new')
-def layout_new():
-    return render_template('layout-new.html')
-
-
 @app.route('/blog-example')
 def blog_example():
     return render_template('blog-example.html')
