@@ -84,6 +84,21 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/new')
+def index_new():
+    return render_template('index-new.html')
+
+
+@app.route('/layout-new')
+def layout_new():
+    return render_template('layout-new.html')
+
+
+@app.route('/blog-example')
+def blog_example():
+    return render_template('blog-example.html')
+
+
 @app.route('/get-random-paper')
 def get_random_paper():
     return redirect(url_for('report', paper_idx=random.choice(df.index)))
@@ -136,25 +151,20 @@ def report():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    form = SearchForm()
-    if form.validate_on_submit():
-        return redirect(url_for('results', query=form.search.data))
-    return render_template('search.html', form=form)
-
-
-@app.route('/get-text-loadings', methods=['GET', 'POST'])
-def get_text_loadings():
-    form = BigSearchForm()
-    if form.validate_on_submit():
-        return redirect(url_for('loadings_results', query=form.search.data))
-    return render_template('get-text-loadings.html', form=form)
+    search_form = SearchForm()
+    big_search_form = BigSearchForm()
+    if search_form.submit1.data and search_form.validate_on_submit():
+        return redirect(url_for('results', query=search_form.search.data))
+    if big_search_form.submit2.data and big_search_form.validate_on_submit():
+        return redirect(url_for('loadings_results', query=big_search_form.search.data))
+    return render_template('search.html', search_form=search_form, big_search_form=big_search_form)
 
 
 @app.route('/loadings-results')
 def loadings_results():
     query = request.args.get('query', type=str)
     if not query:
-        return redirect(url_for('get_text_loadings'))
+        return redirect(url_for('search'))
 
     # Get similar docs by loadings
     vec = tfidf_vectorizer.transform([query])

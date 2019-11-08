@@ -6,7 +6,16 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <h1>How Topics Are Defined</h1>
+
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-12 font-italic">How Topics Are Defined</h1>
+            <p class="lead my-3">"Topics" are distinct collections of words that tend to occur together. Then, we hand-label each collection.</p>
+            <!-- <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p> -->
+        </div>
+    </div>
+
+    <!-- <h1>How Topics Are Defined</h1> -->
     <div>
         <p><i>Note: The graphs below can take a few seconds to load.</i></p>
         <p>When we're using non-negative matrix factorization (NMF), we can think of a "topic" as a group of words that tend to be used together in documents, or as types of documents which tend to use similar words.</p>

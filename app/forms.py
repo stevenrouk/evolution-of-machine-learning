@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired
 
 class SearchForm(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
-    submit = SubmitField('Search')
+    submit1 = SubmitField('Search')
 
 class BigSearchForm(FlaskForm):
     search = TextAreaField('Search', validators=[DataRequired()])
-    submit = SubmitField('Search')
+    submit2 = SubmitField('Search')
