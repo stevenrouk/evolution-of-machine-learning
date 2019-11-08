@@ -5,16 +5,16 @@ TOPIC_NAMES_3 = [
 ]
 
 TOPIC_NAMES_10 = [
-    'machine learning / time series', #0
-    'gradient / optimization / convergence', #1
-    'neural networks / deep learning', #2
-    'reinforcement learning', #3
-    'variational bayesian', #4
-    'graphs / graph ML', #5
-    'ML attacks / GANs', #6
-    'image / text / classification', #7
-    'clustering', #8
-    'algorithms / regret / optimization' #9
+    'Machine Learning, Time Series', #0
+    'Gradient, Optimization, Convergence', #1
+    'Neural Networks, Deep Learning', #2
+    'Reinforcement Learning', #3
+    'Variational Bayesian', #4
+    'Graphs, Graph ML', #5
+    'ML Attacks, GANs', #6
+    'Images, NLP, Classification', #7
+    'Clustering', #8
+    'Algorithms, Regret, Optimization' #9
 ]
 
 TOPIC_NAMES_20 = [
