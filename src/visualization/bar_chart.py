@@ -5,9 +5,9 @@ from bokeh.sampledata.autompg import autompg_clean as df
 from bokeh.transform import factor_cmap
 import matplotlib.cm as cm
 
-def get_barchart(df, x_col, y_col, title, bar_color, hover_fill_color):
+def get_barchart(df, x_col, y_col, title, bar_color, hover_fill_color, y_axis_label=''):
     p = figure(plot_width=800, plot_height=300, title=title,
-               x_range=df[x_col], toolbar_location=None, tools="")
+               x_range=df[x_col], toolbar_location=None, tools="", y_axis_label=y_axis_label)
 
     p.xgrid.grid_line_color = None
     # p.xaxis.axis_label = "Manufacturer grouped by # Cylinders"

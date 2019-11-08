@@ -309,7 +309,14 @@ def how_topics_are_defined():
         hover_fill_color = tuple(abs(c - 40) for c in color)
         color = '#%02x%02x%02x' % color
         hover_fill_color = '#%02x%02x%02x' % hover_fill_color
-        plot = get_barchart(data, 'x', 'y', title=topic_names[i], bar_color=color, hover_fill_color=hover_fill_color)
+        plot = get_barchart(data,
+            'x',
+            'y',
+            title=topic_names[i],
+            bar_color=color,
+            hover_fill_color=hover_fill_color,
+            y_axis_label='Loadings'
+        )
         script, div = components(plot)
         scripts.append(script)
         divs.append(div)
