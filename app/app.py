@@ -82,6 +82,12 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return redirect(url_for('index')) 
+
+
 @app.route('/blog-example')
 def blog_example():
     return render_template('blog-example.html')
