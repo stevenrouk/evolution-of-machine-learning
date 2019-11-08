@@ -7,12 +7,21 @@
 {% endblock %}
 {% block content %}
     <h1>Machine Learning Research Paper Search</h1>
-    <p>Use this form to search for papers. Or, use the <a href="{{ url_for('get_text_loadings') }}"><b>Text Search</b></a> to input the full description of a machine learning paper and get topics and similar papers.</p>
+    <p>Use this form to search for papers. Or, use the <b>Text Search</b> to input the full description of a machine learning paper and get topics and similar papers.</p>
     <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
+        {{ search_form.hidden_tag() }}
         <p>
-            {{ form.search(size=32) }}
+            {{ search_form.search(size=32) }}
         </p>
-        <p>{{ form.submit() }}</p>
+        <p>{{ search_form.submit1() }}</p>
+    </form>
+    <h1>Machine Learning Research Paper Search</h1>
+    <p>Paste in text from a machine learning research paper and get research paper topics and similar papers.</p>
+    <form action="" method="post" novalidate>
+        {{ big_search_form.hidden_tag() }}
+        <p>
+            {{ big_search_form.search(cols="60", rows="5") }}
+        </p>
+        <p>{{ big_search_form.submit2() }}</p>
     </form>
 {% endblock %}
