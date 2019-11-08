@@ -6,13 +6,20 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <h1>Search results</h1>
-    <a href="{{ url_for('search') }}">Search Again</a>
-    <div class="container">
-        <div class="flex-item">
-            <p><i>Query: {{ query }}</i></p>
+
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 font-italic">Search results</h1>
         </div>
-        <div class="flex-item">
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p><b>Query:</b></p>
+            <p><i>{{ query }}</i></p>
+        </div>
+        <div class="col-md-6">
+            <p><b>Topic loadings:</b></p>
             <table>
                 {% for val in loadings.round(3) %}
                     <tr>

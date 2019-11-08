@@ -6,12 +6,22 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <h1>Search results for {{ query }}</h1>
-    <a href="{{ url_for('search') }}">Search Again</a>
-    <hr>
-    <ol>
-        {% for index, row in similar_documents_tfidf.iterrows() %}
-        <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
-        {% endfor %}
-    </ol>
+
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 font-italic">Search results</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Query: <i>{{ query }}</i></h2>
+            <ol>
+                {% for index, row in similar_documents_tfidf.iterrows() %}
+                <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+
 {% endblock %}
