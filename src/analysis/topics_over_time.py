@@ -144,6 +144,7 @@ def topic_evolution(
             ax=axs[0]
         )
         plt.gcf().subplots_adjust(bottom=0.18)
+        plt.gcf().subplots_adjust(left=0.18)
     if output:
         plt.savefig(output)
     else:
@@ -153,6 +154,7 @@ def create_topic_evolution_boxplot(vals, labels, sym=None, title=None, ax=None, 
     _ = ax.boxplot(vals, sym=sym)
     _ = ax.set_title(title)
     _ = ax.set_xticklabels(labels=labels, rotation=90)
+    _ = ax.set_ylabel("Topic Loadings")
 
     if tight:
         _ = ax.set_xticklabels(labels=labels, fontsize=6)
