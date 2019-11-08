@@ -34,12 +34,6 @@ MODELS_DIRECTORY = os.path.join(ROOT_DIRECTORY, 'models')
 FINAL_DF_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'final.csv')
 ML_ONLY_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'machine_learning_only.csv')
 
-# Set up database connection
-conn = psycopg2.connect(database="capstone2",
-                        user="postgres",
-                        host="localhost", port="5435")
-cur = conn.cursor()
-
 # Read in data
 df = pd.read_csv(ML_ONLY_FILEPATH)
 
@@ -68,6 +62,10 @@ with open(tfidf_vectorized_corpus_filename, 'rb') as f:
 # Create Flask app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
+if os.environ['USER'] == 'stevenrouk':
+    app.config['DEBUG'] = True
+else:
+    app.config['DEBUG'] = False
 
 
 def normalize_paper_loadings(loadings):
@@ -329,4 +327,4 @@ def how_topics_are_defined():
 # With debug=True, Flask server will auto-reload
 # when there are code changes
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080)
