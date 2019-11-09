@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block title %}
+    Search
+{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-12 font-italic">Analysis by Year</h1>
+            <p class="lead my-3">Diving deeper into machine learning topics by year.</p>
+        </div>
+    </div>
+
+
+    <form action="{{ url_for('analysis_by_year') }}" method="GET">
+        <select name="year">
+            {% for y in valid_years %}
+                {% if year == y %}
+                <option value="{{ y }}" selected>{{ y }}</option>
+                {% else %}
+                <option value="{{ y }}">{{ y }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <select name="num_topics">
+            {% for n in valid_num_topics %}
+                {% if num_topics == n %}
+                <option value="{{ n }}" selected>{{ n }}</option>
+                {% else %}
+                <option value="{{ n }}">{{ n }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+
+    <!-- <div class="row mb-2">
+      <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">1</strong>
+            <h3 class="mb-0">Keyword Search</h3>
+            <p class="card-text mb-auto">Search for research papers using keywords.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success">2</strong>
+            <h3 class="mb-0">Get Topics for Text</h3>
+            <p class="mb-auto">Paste in the abstract text for a machine learning research paper and get topics and similar papers.</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <table>
+      <tr>
+        <td></td>
+      </tr>
+      {% for i, row in data.iterrows() %}
+      <tr>
+        <!-- <td>{{ row['year'] }}</td> -->
+        <!-- <td>{{ row['topic_idx'] }}</td> -->
+        <td>{{ row['words'] }}</td>
+        <!-- {% for k in row %}
+        <td>{{ k }}</td> -->
+        <!-- <td>{{ row[k] }}</td> -->
+        <!-- {% endfor %} -->
+      </tr>
+      {% endfor %}
+    </table>
+
+
+{% endblock %}

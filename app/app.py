@@ -42,6 +42,7 @@ model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_model.pkl')
 vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
 weights_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_weights_W.pkl')
 tfidf_vectorized_corpus_filename = os.path.join(MODELS_DIRECTORY, f'tfidf_vectorized_corpus.pkl')
+year_topics_df_filename = os.path.join(MODELS_DIRECTORY, f'year_topics_2018_2019_1_2_3_4_10.pkl')
 
 print('loading model')
 with open(model_filename, 'rb') as f:
@@ -58,6 +59,10 @@ with open(weights_filename, 'rb') as f:
 print('loading tf-idf vectorized corpus')
 with open(tfidf_vectorized_corpus_filename, 'rb') as f:
     tfidf_corpus = pickle.load(f)
+
+print('loading year-topics dataframe')
+with open(year_topics_df_filename, 'rb') as f:
+    year_topics_df = pickle.load(f)
 
 # Create Flask app
 app = Flask(__name__)
@@ -141,6 +146,36 @@ def report():
         similar_documents=similar_docs,
         similar_documents_tfidf=tfidf_similar_docs
     )
+
+
+@app.route('/analysis-by-year', methods=['GET', 'POST'])
+def analysis_by_year():
+    valid_years = list(range(2000, 2019+1))
+    year = request.args.get('year', type=int)
+    if year is None:
+        year = 2019
+
+    valid_num_topics = [1, 2, 3, 4, 10]
+    num_topics = request.args.get('num_topics', type=int)
+    if num_topics is None:
+        num_topics = 3
+
+    df_sub = year_topics_df[(year_topics_df['year'] == year) & (year_topics_df['num_topics'] == num_topics)]
+    return render_template(
+        'analysis-by-year.html',
+        data=df_sub,
+        year=year,
+        num_topics=num_topics,
+        valid_years=valid_years,
+        valid_num_topics=valid_num_topics
+    )
+    # search_form = SearchForm()
+    # big_search_form = BigSearchForm()
+    # if search_form.submit1.data and search_form.validate_on_submit():
+    #     return redirect(url_for('results', query=search_form.search.data))
+    # if big_search_form.submit2.data and big_search_form.validate_on_submit():
+    #     return redirect(url_for('loadings_results', query=big_search_form.search.data))
+    # return render_template('search.html', search_form=search_form, big_search_form=big_search_form)
 
 
 @app.route('/search', methods=['GET', 'POST'])
