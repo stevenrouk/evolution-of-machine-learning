@@ -169,13 +169,6 @@ def analysis_by_year():
         valid_years=valid_years,
         valid_num_topics=valid_num_topics
     )
-    # search_form = SearchForm()
-    # big_search_form = BigSearchForm()
-    # if search_form.submit1.data and search_form.validate_on_submit():
-    #     return redirect(url_for('results', query=search_form.search.data))
-    # if big_search_form.submit2.data and big_search_form.validate_on_submit():
-    #     return redirect(url_for('loadings_results', query=big_search_form.search.data))
-    # return render_template('search.html', search_form=search_form, big_search_form=big_search_form)
 
 
 @app.route('/search', methods=['GET', 'POST'])
