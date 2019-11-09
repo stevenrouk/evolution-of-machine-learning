@@ -148,7 +148,7 @@ def report():
     )
 
 
-@app.route('/analysis-by-year', methods=['GET', 'POST'])
+@app.route('/analysis-by-year')
 def analysis_by_year():
     valid_years = list(range(2000, 2019+1))
     year = request.args.get('year', type=int)
@@ -161,13 +161,43 @@ def analysis_by_year():
         num_topics = 3
 
     df_sub = year_topics_df[(year_topics_df['year'] == year) & (year_topics_df['num_topics'] == num_topics)]
+    df_sub = df_sub.reset_index()
+
+    scripts = []
+    divs = []
+    for i, row in df_sub.iterrows():
+        data = pd.DataFrame({
+            'x': row['words'],
+            'y': row['loadings']
+            })
+        color = cm.Set3.colors[i]
+        color = tuple(round(c * 255) for c in color)
+        hover_fill_color = tuple(abs(c - 40) for c in color)
+        color = '#%02x%02x%02x' % color
+        hover_fill_color = '#%02x%02x%02x' % hover_fill_color
+        plot = get_barchart(data,
+            'x',
+            'y',
+            title=f'Topic {i}',
+            bar_color=color,
+            hover_fill_color=hover_fill_color,
+            y_axis_label='Loadings'
+        )
+        script, div = components(plot)
+        scripts.append(script)
+        divs.append(div)
+
     return render_template(
         'analysis-by-year.html',
         data=df_sub,
         year=year,
         num_topics=num_topics,
         valid_years=valid_years,
-        valid_num_topics=valid_num_topics
+        valid_num_topics=valid_num_topics,
+        # top_words=top_words,
+        # word_loadings=word_loadings,
+        scripts=scripts,
+        divs=divs
     )
 
 
