@@ -1,18 +1,17 @@
-from collections import Counter
 import os
-import pickle
-
-import pandas as pd
-import numpy as np
-
-from sklearn.cluster import KMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
-from gensim.models.ldamulticore import LdaMulticore
 
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import NMF
+
+
+# Set global font size
 plt.rcParams.update({'font.size': 16})
 
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
@@ -40,6 +39,7 @@ def hand_label_topics(H, vocabulary):
         print()
     return hand_labels
 
+
 def print_influential_words_per_topic(H, vocabulary):
     '''
     Print the most influential words of each latent topic.
@@ -50,6 +50,7 @@ def print_influential_words_per_topic(H, vocabulary):
         print('-->', ' '.join(vocabulary[top_ten]))
         print(H[i, top_ten])
         print()
+
 
 def get_top_words_by_loadings(H, features):
     return features[np.argsort(np.sum(H, axis=0))[::-1][:30]]
