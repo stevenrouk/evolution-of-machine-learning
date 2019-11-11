@@ -6,6 +6,11 @@ All Papers
 
 {% block head %}
 {{ super() }}
+<style type="text/css">
+  .td-pad {
+    padding: 0px 15px 0px 0px;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -41,8 +46,8 @@ All Papers
 <table>
   {% for val in row['loadings'].round(3) %}
   <tr>
+    <td class="td-pad">{{ '%.0f' % (val*100) }}%</td>
     <td>{{ topics[loop.index0] }}</td>
-    <td>{{ val }}</td>
   </tr>
   {% endfor %}
 </table>
