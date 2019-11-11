@@ -5,6 +5,7 @@ import time
 
 import requests
 
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]

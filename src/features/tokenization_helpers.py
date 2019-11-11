@@ -12,5 +12,6 @@ DATA_DIRECTORY_PROCESSED_DFS = os.path.join(ROOT_DIRECTORY, 'data', 'processed',
 FINAL_DF_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'final.csv')
 ML_ONLY_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'machine_learning_only.csv')
 
+
 if __name__ == "__main__":
     df_ml = pd.read_csv(ML_ONLY_FILEPATH, encoding='utf-8')

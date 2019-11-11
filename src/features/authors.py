@@ -4,16 +4,13 @@ import pickle
 
 import click
 import pandas as pd
-import numpy as np
-
-from sklearn.cluster import KMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
-from gensim.models.ldamulticore import LdaMulticore
 
 import matplotlib.pyplot as plt
+
+# Set global font size
 plt.rcParams.update({'font.size': 16})
 
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
