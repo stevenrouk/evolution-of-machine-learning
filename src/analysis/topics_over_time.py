@@ -1,12 +1,16 @@
 import os
 import pickle
+import sys
 
 import click
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from topic_names import TOPIC_NAMES_LOOKUP
+# Enable src imports
+sys.path.append('.')
+
+from src.analysis.topic_names import TOPIC_NAMES_LOOKUP
 
 # Set global font size
 plt.rcParams.update({'font.size': 16})

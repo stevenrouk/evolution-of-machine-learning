@@ -7,7 +7,6 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 
-
 # Set global font size
 plt.rcParams.update({'font.size': 16})
 
