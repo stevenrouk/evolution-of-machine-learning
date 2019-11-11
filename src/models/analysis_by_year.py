@@ -107,26 +107,30 @@ def create_year_topics_df(n_components, start_year, end_year, outfile):
     """
     Look at topic loadings by year.
     """
-    if outfile is None:
-        n_components_filepath = '_'.join([str(x) for x in n_components])
-        outfile = os.path.join(MODELS_DIRECTORY, f'year_topics_{start_year}_{end_year}_{n_components_filepath}.pkl')
-    # Load data
-    df_ml = pd.read_csv(ML_ONLY_FILEPATH, encoding='utf-8')
-    df_ml['first_date'] = df_ml['dates'].str.split(',').str[0]
-    data = []
-    for year in range(start_year, end_year + 1):
-        print(year)
-        df_ml_year = get_year_df(df_ml, 'first_date', year)
-        for n in n_components:
-            print(n)
-            word_loadings_data = get_topics_for_year(df_ml_year, num_topics=n, print_or_return='return')
-            for topic_idx, words, loadings in word_loadings_data:
-                data.append((year, n, topic_idx, words, loadings))
-        print("********************")
-    
-    year_topics_df = pd.DataFrame(data, columns=['year', 'num_topics', 'topic_idx', 'words', 'loadings'])
-    with open(outfile, 'wb') as f:
-        pickle.dump(year_topics_df, f)
+    try:
+        if outfile is None:
+            n_components_filepath = '_'.join([str(x) for x in n_components])
+            outfile = os.path.join(MODELS_DIRECTORY, f'year_topics_{start_year}_{end_year}_{n_components_filepath}.pkl')
+        # Load data
+        df_ml = pd.read_csv(ML_ONLY_FILEPATH, encoding='utf-8')
+        df_ml['first_date'] = df_ml['dates'].str.split(',').str[0]
+        data = []
+        for year in range(start_year, end_year + 1):
+            print(year)
+            df_ml_year = get_year_df(df_ml, 'first_date', year)
+            for n in n_components:
+                print(n)
+                word_loadings_data = get_topics_for_year(df_ml_year, num_topics=n, print_or_return='return')
+                for topic_idx, words, loadings in word_loadings_data:
+                    data.append((year, n, topic_idx, words, loadings))
+            print("********************")
+        
+        year_topics_df = pd.DataFrame(data, columns=['year', 'num_topics', 'topic_idx', 'words', 'loadings'])
+        with open(outfile, 'wb') as f:
+            pickle.dump(year_topics_df, f)
+    except Exception as e:
+        print(e)
+        import pdb; pdb.set_trace()
 
 
 if __name__ == "__main__":
