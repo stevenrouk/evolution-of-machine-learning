@@ -194,7 +194,7 @@ def analysis_by_year():
         num_topics=num_topics,
         valid_years=valid_years,
         valid_num_topics=valid_num_topics,
-        # top_words=top_words,
+        top_words=df_sub['words'].values,
         # word_loadings=word_loadings,
         scripts=scripts,
         divs=divs

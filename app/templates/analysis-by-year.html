@@ -14,28 +14,56 @@
         </div>
     </div>
 
+    <div class="row mb-2">
+      <div class="col-md-2">
+      </div>
 
-    <form action="{{ url_for('analysis_by_year') }}" method="GET">
-        <select name="year">
-            {% for y in valid_years %}
-                {% if year == y %}
-                <option value="{{ y }}" selected>{{ y }}</option>
-                {% else %}
-                <option value="{{ y }}">{{ y }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <select name="num_topics">
-            {% for n in valid_num_topics %}
-                {% if num_topics == n %}
-                <option value="{{ n }}" selected>{{ n }}</option>
-                {% else %}
-                <option value="{{ n }}">{{ n }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <input type="submit">
-    </form>
+      <div class="col-md-4">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+
+          <form action="{{ url_for('analysis_by_year') }}" method="GET">
+              <p>
+              If we look at only machine learning papers from the year 
+              <select name="year" class="btn btn-secondary btn-sm dropdown-toggle">
+                  {% for y in valid_years %}
+                      {% if year == y %}
+                      <option value="{{ y }}" selected>{{ y }}</option>
+                      {% else %}
+                      <option value="{{ y }}">{{ y }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select>, what topics would we find if we looked for  
+              <select name="num_topics" class="btn btn-secondary btn-sm dropdown-toggle">
+                  {% for n in valid_num_topics %}
+                      {% if num_topics == n %}
+                      <option value="{{ n }}" selected>{{ n }}</option>
+                      {% else %}
+                      <option value="{{ n }}">{{ n }}</option>
+                      {% endif %}
+                  {% endfor %}
+              </select> topic(s)?
+              </p>
+              <p>
+              <input type="submit">
+              </p>
+            </form>
+            </div>
+            </div>
+      </div>
+
+      <div class="col-md-4">
+          <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <p><i>Select a year and number of topics to generate, and then look through the words for each topic below.</i></p>
+            <p><i>Do you see any cohesive topics / subfields pop out? How do they vary from year to year?</i></p>
+                </div>
+                </div>
+
+      <div class="col-md-2">
+      </div>
+
+    </div>
 
     <!-- <div class="row mb-2">
       <div class="col-md-6">
@@ -61,9 +89,13 @@
 
     {% for _ in scripts %}
     <div class="container">
+      <hr>
         <!-- <div class="flex-item">
             {{ topic }}
         </div> -->
+        <div>
+          <p><b>Topic Words:</b> {{ ', '.join(top_words[loop.index0]) }}</p>
+        </div>
         <div class="flex-item">
             {{ divs[loop.index0]|safe }}
             {{ scripts[loop.index0]|safe }}
