@@ -12,6 +12,7 @@ DATA_DIRECTORY_RAW = os.path.join(ROOT_DIRECTORY, 'data', 'raw')
 QUEUE_FILEPATH = os.path.join(SCRIPT_DIRECTORY, 'queue.txt')
 BASE_URL = 'http://export.arxiv.org/oai2'
 
+
 def build_url(verb=None, metadata_prefix=None, set_spec=None, resumption_token=None):
     url = [BASE_URL, '?']
     if verb:
@@ -27,16 +28,19 @@ def build_url(verb=None, metadata_prefix=None, set_spec=None, resumption_token=N
         url.pop()
     if url[-1] == '?':
         url.pop()
-    
+
     return ''.join(url)
+
 
 def build_first_call_url(set_spec=None):
     """Format: http://export.arxiv.org/oai2?verb=ListRecords&set=stat&metadataPrefix=oai_dc"""
     return build_url(verb='ListRecords', metadata_prefix='oai_dc', set_spec=set_spec)
 
+
 def build_resumption_url(resumption_token):
     """Format: http://export.arxiv.org/oai2?verb=ListRecords&resumptionToken=3902257|1001"""
     return build_url(verb='ListRecords', resumption_token=resumption_token)
+
 
 def get_resumption_token(response_text):
     # resumption token substring
@@ -44,12 +48,15 @@ def get_resumption_token(response_text):
 
     return re.search(r'>(\d+\|\d+)<', resump_text).groups()[0]
 
+
 def make_name_file_safe(filename):
-    return "".join([c for c in filename if c.isalpha() or c.isdigit() or c==' ']).rstrip()
+    return "".join([c for c in filename if c.isalpha() or c.isdigit() or c == ' ']).rstrip()
+
 
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.option('--resumption-token', default='', help='The next resumption token to use in the API calls.')
@@ -119,6 +126,7 @@ def start_data_pull(resumption_token='', full_pull=False):
         with open('failed_token.txt', 'a') as f:
             f.write('\n')
             f.write(resumption_token)
+
 
 if __name__ == "__main__":
     cli()
