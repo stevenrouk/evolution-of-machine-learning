@@ -1,24 +1,18 @@
 import os
-import sys
-sys.path.append('.')
-
-from collections import Counter
 import pickle
 
 import click
-import pandas as pd
-import numpy as np
-
-from sklearn.cluster import KMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
-from gensim.models.ldamulticore import LdaMulticore
-
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import NMF
+
+# Set global font size
 plt.rcParams.update({'font.size': 16})
 
-from src.analysis.topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
-
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
@@ -72,7 +66,7 @@ def get_topics_for_year(df, num_topics=3, print_or_return='print'):
     tfidf_ml = tfidf_vectorizer.fit_transform(df['description'])
     features = np.array(tfidf_vectorizer.get_feature_names())
     nmf_model = NMF(n_components=num_topics, random_state=42)
-    W = nmf_model.fit_transform(tfidf_ml)
+    nmf_model.fit(tfidf_ml)
     H = nmf_model.components_
 
     if print_or_return == 'print':
@@ -124,7 +118,7 @@ def create_year_topics_df(n_components, start_year, end_year, outfile):
                 for topic_idx, words, loadings in word_loadings_data:
                     data.append((year, n, topic_idx, words, loadings))
             print("********************")
-        
+
         year_topics_df = pd.DataFrame(data, columns=['year', 'num_topics', 'topic_idx', 'words', 'loadings'])
         with open(outfile, 'wb') as f:
             pickle.dump(year_topics_df, f)
