@@ -42,7 +42,7 @@ model_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_model.pkl')
 vectorizer_filename = os.path.join(MODELS_DIRECTORY, f'vectorizer_tfidf.pkl')
 weights_filename = os.path.join(MODELS_DIRECTORY, f'nmf_10_weights_W.pkl')
 tfidf_vectorized_corpus_filename = os.path.join(MODELS_DIRECTORY, f'tfidf_vectorized_corpus.pkl')
-year_topics_df_filename = os.path.join(MODELS_DIRECTORY, f'year_topics_2018_2019_1_2_3_4_10.pkl')
+year_topics_df_filename = os.path.join(MODELS_DIRECTORY, f'year_topics_2000_2019_1_2_3_4_10_20.pkl')
 
 print('loading model')
 with open(model_filename, 'rb') as f:
@@ -155,7 +155,7 @@ def analysis_by_year():
     if year is None:
         year = 2019
 
-    valid_num_topics = [1, 2, 3, 4, 10]
+    valid_num_topics = [1, 2, 3, 4, 10, 20]
     num_topics = request.args.get('num_topics', type=int)
     if num_topics is None:
         num_topics = 3
@@ -170,7 +170,7 @@ def analysis_by_year():
             'x': row['words'],
             'y': row['loadings']
             })
-        color = cm.Set3.colors[i]
+        color = cm.Set3.colors[i % 12]
         color = tuple(round(c * 255) for c in color)
         hover_fill_color = tuple(abs(c - 40) for c in color)
         color = '#%02x%02x%02x' % color
