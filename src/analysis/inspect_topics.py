@@ -1,22 +1,18 @@
-from collections import Counter
 import os
 import pickle
 import string
 
 import click
-import pandas as pd
-import numpy as np
-
-from sklearn.cluster import KMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
-from gensim.models.ldamulticore import LdaMulticore
-
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+from .topic_names import TOPIC_NAMES_LOOKUP
+
+# Set global font size
 plt.rcParams.update({'font.size': 16})
 
-from .topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
-
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
@@ -40,6 +36,7 @@ word_color_mappings = {
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.option('--n-components', default=10, help='Number of NMF topics (to look up model).')
@@ -75,6 +72,7 @@ def topic_words(n_components):
         print(H[i, top_ten])
         print()
 
+
 @cli.command()
 @click.option('--n-components', default=10, help='Number of NMF topics (to look up model).')
 @click.option('--topic-idx', default=0, help='Index of the topic.')
@@ -89,15 +87,15 @@ def topic_documents(n_components=10, topic_idx=0, n_documents=5, title_only=Fals
     if not os.path.exists(weights_filename):
         print("weights file doesn't exist")
         return
-    
+
     print('loading weights')
     with open(weights_filename, 'rb') as f:
         W = pickle.load(f)
-    
+
     print('loading DataFrame')
     df_ml = pd.read_csv(ML_ONLY_FILEPATH, encoding='utf-8')
     df_ml = df_ml.reset_index(drop=True)
-    
+
     document_topic_loadings = W[:, topic_idx]
     top_document_idxs = np.argsort(document_topic_loadings)[::-1][:n_documents]
     top_document_descriptions = df_ml['description'][top_document_idxs].values
@@ -118,6 +116,7 @@ def topic_documents(n_components=10, topic_idx=0, n_documents=5, title_only=Fals
         print('*' * 70)
         print()
 
+
 def softmax(v, temperature=1.0):
     '''
     A heuristic to convert arbitrary positive values into probabilities.
@@ -126,6 +125,7 @@ def softmax(v, temperature=1.0):
     expv = np.exp(v / temperature)
     s = np.sum(expv)
     return expv / s
+
 
 def analyze_article(paper_idx, descriptions, titles, W, hand_labels):
     '''
@@ -140,6 +140,7 @@ def analyze_article(paper_idx, descriptions, titles, W, hand_labels):
     for prob, label in zip(probs, hand_labels):
         print('--> {:.2f}% {}'.format(prob * 100, label))
     print()
+
 
 def get_colorful_words(topic_idx, paper_words, word_topic_loading_lookup, word_color_mappings):
     colorful_paper_description = []
@@ -159,8 +160,9 @@ def get_colorful_words(topic_idx, paper_words, word_topic_loading_lookup, word_c
                 colorful_paper_description.append(word_color_mappings[3].format(word))
         else:
             colorful_paper_description.append(word)
-    
+
     return colorful_paper_description
+
 
 def print_article_colored_by_word_loadings(df_ml, document_idx, word_topic_loading_lookup, topic_labels=None):
     translation = str.maketrans(string.punctuation, ' '*len(string.punctuation))
@@ -176,6 +178,7 @@ def print_article_colored_by_word_loadings(df_ml, document_idx, word_topic_loadi
         print()
         print('*' * 70)
         print()
+
 
 @cli.command()
 @click.option('--n-components', default=10, help='Number of NMF topics (to look up model).')
@@ -210,7 +213,7 @@ def get_document_report(n_components, document_idx=None, document_title=None):
     print('loading vectorizer')
     with open(vectorizer_filename, 'rb') as f:
         tfidf_vectorizer = pickle.load(f)
-    
+
     print('loading weights')
     with open(weights_filename, 'rb') as f:
         W = pickle.load(f)
@@ -241,13 +244,14 @@ def get_document_report(n_components, document_idx=None, document_title=None):
             document_idx = relevant_indices[0]
 
     analyze_article(document_idx, df_ml['description'], df_ml['title'], W, TOPIC_NAMES_LOOKUP[n_components])
-    
+
     print()
     print('*' * 70)
     print()
 
     # print paragraphs, one for each topic, words colored by topic loadings
     print_article_colored_by_word_loadings(df_ml, document_idx, word_topic_loading_lookup, topic_labels=TOPIC_NAMES_LOOKUP[n_components])
+
 
 if __name__ == "__main__":
     cli()

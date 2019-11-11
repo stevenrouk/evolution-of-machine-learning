@@ -1,23 +1,14 @@
-from collections import Counter
 import os
 import pickle
-import string
 
 import click
-import pandas as pd
-import numpy as np
-
-from sklearn.cluster import KMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
-from gensim.models.ldamulticore import LdaMulticore
+import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 
-import matplotlib.pyplot as plt
+# Set global font size
 plt.rcParams.update({'font.size': 16})
 
-from topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
-
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
@@ -60,6 +51,7 @@ def create(n_components):
 
     print('instantiating model')
     tsne_model = TSNE(n_components=2)
+
     print('fitting model')
     W_tsne = tsne_model.fit_transform(W)
 

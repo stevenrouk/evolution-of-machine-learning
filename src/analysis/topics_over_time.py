@@ -1,21 +1,17 @@
-from collections import Counter
 import os
 import pickle
 
 import click
-import pandas as pd
-import numpy as np
-
-from sklearn.cluster import KMeans
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
-from gensim.models.ldamulticore import LdaMulticore
-
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+from topic_names import TOPIC_NAMES_LOOKUP
+
+# Set global font size
 plt.rcParams.update({'font.size': 16})
 
-from topic_names import TOPIC_NAMES_3, TOPIC_NAMES_10, TOPIC_NAMES_20, TOPIC_NAMES_LOOKUP
-
+# Paths
 SCRIPT_DIRECTORY = os.path.split(os.path.realpath(__file__))[0]
 SRC_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
 ROOT_DIRECTORY = os.path.split(SRC_DIRECTORY)[0]
@@ -31,6 +27,7 @@ ML_ONLY_FILEPATH = os.path.join(DATA_DIRECTORY_PROCESSED, 'machine_learning_only
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.option('--topic-idx', default=0, help='Index of the topic to look at')
@@ -60,20 +57,21 @@ def topic_evolution(
     if not os.path.exists(weights_filename):
         print("weights file doesn't exist")
         return
-    
+
     print('loading weights')
     with open(weights_filename, 'rb') as f:
         W = pickle.load(f)
 
     print('loading DataFrame')
     df_ml = pd.read_csv(ML_ONLY_FILEPATH, encoding='utf-8')
+
+    # create 'years' Series
     df_ml['first_date'] = df_ml['dates'].str.split(',').str[0]
     df_ml['year'] = df_ml['first_date'].map(lambda x: x.split('-')[0])
     years = df_ml['year']
     years = years.reset_index(drop=True)
 
     print('creating boxplot')
-
     sym = None if show_outliers else ''
     if all_topics:
         nrows = (W.shape[1] + 3) // 4
@@ -85,7 +83,6 @@ def topic_evolution(
             _, axs = plt.subplots(nrows=nrows, ncols=ncols)
         plt.rcParams.update({'font.size': 10})
         plt.tight_layout()
-        #plt.suptitle("Prevalence of Topics Over Time")
         for topic_idx in range(W.shape[1]):
             W_series = pd.Series(W[:, topic_idx])
             W_series.name = 'topic_loadings'
@@ -149,6 +146,7 @@ def topic_evolution(
         plt.savefig(output)
     else:
         plt.show()
+
 
 def create_topic_evolution_boxplot(vals, labels, sym=None, title=None, ax=None, show_xlabel=True, tight=False):
     _ = ax.boxplot(vals, sym=sym)
