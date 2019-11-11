@@ -1,38 +1,42 @@
 {% extends "layout.html" %}
+
 {% block title %}
-    How Topics Are Defined
+How Topics Are Defined
 {% endblock %}
+
 {% block head %}
-    {{ super() }}
+{{ super() }}
 {% endblock %}
+
 {% block content %}
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+  <div class="col-md-6 px-0">
+    <h1 class="display-12 font-italic">How Topics Are Defined</h1>
+    <p class="lead my-3">"Topics" are distinct collections of words that tend to occur together. Then, we hand-label
+      each collection.</p>
+  </div>
+</div>
 
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-            <h1 class="display-12 font-italic">How Topics Are Defined</h1>
-            <p class="lead my-3">"Topics" are distinct collections of words that tend to occur together. Then, we hand-label each collection.</p>
-            <!-- <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p> -->
-        </div>
-    </div>
+<div>
+  <p><i>Note: The graphs below can take a few seconds to load.</i></p>
+  <p>When we're using non-negative matrix factorization (NMF), we can think of a "topic" as a group of words that tend
+    to be used together in documents, or as types of documents which tend to use similar words.</p>
+  <p>After running the NMF model, topics have to be named manually based on the words that are most indicative of that
+    topic. How much a topic is defined by a word is called that word's "topic loading". Documents also have "loadings",
+    which show how much that document is defined by a topic.</p>
+  <p>These topic names are what I came up with based on the words that loaded most heavily on that topic. You may come
+    up with different names, based on your field and depth of experience in machine learning.</p>
+</div>
 
-    <!-- <h1>How Topics Are Defined</h1> -->
-    <div>
-        <p><i>Note: The graphs below can take a few seconds to load.</i></p>
-        <p>When we're using non-negative matrix factorization (NMF), we can think of a "topic" as a group of words that tend to be used together in documents, or as types of documents which tend to use similar words.</p>
-        <p>After running the NMF model, topics have to be named manually based on the words that are most indicative of that topic. How much a topic is defined by a word is called that word's "topic loading". Documents also have "loadings", which show how much that document is defined by a topic.</p>
-        <p>These topic names are what I came up with based on the words that loaded most heavily on that topic. You may come up with different names, based on your field and depth of experience in machine learning.</p>
-    </div>
-    {% for topic in topic_names %}
-        <div class="container">
-            <!-- <div class="flex-item">
-                {{ topic }}
-            </div> -->
-            <div class="flex-item">
-                {{ divs[loop.index0]|safe }}
-                {{ scripts[loop.index0]|safe }}
-            </div>
-        </div>
-    {% endfor %}
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+{% for topic in topic_names %}
+<div class="container">
+  <div class="flex-item">
+    {{ divs[loop.index0]|safe }}
+    {{ scripts[loop.index0]|safe }}
+  </div>
+</div>
+{% endfor %}
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
 {% endblock %}

@@ -1,62 +1,66 @@
 {% extends "layout.html" %}
-{% block title %}
-    All Papers
-{% endblock %}
-{% block head %}
-    {{ super() }}
-{% endblock %}
-{% block content %}
 
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-            <h1 class="display-4 font-italic">Page {{ page_num }}</h1>
-        </div>
-    </div>
-    <hr>
-    <div class="row mb-2">
-        <div class="col-md-12">
-            {% if page_num > 1 %}
-            <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
-            {% else %}
-            <a class="btn btn-outline-primary disabled" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
-            {% endif %}
-            <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
-        </div>
-    </div>
-    <!-- <h1>Page {{ page_num }}</h1>
+{% block title %}
+All Papers
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+  <div class="col-md-6 px-0">
+    <h1 class="display-4 font-italic">Page {{ page_num }}</h1>
+  </div>
+</div>
+
+<hr>
+
+<div class="row mb-2">
+  <div class="col-md-12">
     {% if page_num > 1 %}
-    <a href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a> | 
+    <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
+    {% else %}
+    <a class="btn btn-outline-primary disabled" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
     {% endif %}
-    <a href="{{ url_for('papers', page=page_num+1) }}">Next Page</a> -->
-    <hr>
-    {% for index, row in data.iterrows() %}
-        <div><b>paper name:</b> <a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a> (<a href="{{ row['url'] }}" target="_blank">arXiv.org</a>)</div>
-        <div><b>category:</b> {{ row['set_spec'] }}</div>
-        <div><b>subjects:</b> {{ row['subjects'].split('-----') }}</div>
-        <div><b>authors:</b> {{ row['authors'].split('-----') }}</div>
-        <div><b>date:</b> {{ row['dates'].split('-----') }}</div>
-        <div><b>topic loadings:</b></div>
-        <table>
-            {% for val in row['loadings'].round(3) %}
-                <tr>
-                    <td>{{ topics[loop.index0] }}</td>
-                    <td>{{ val }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <br>
-        <div><b>description:</b></div>
-        <div>{{ row['description'] }}</div>
-        <hr>
-    {% endfor %}
-    <div class="row mb-2">
-        <div class="col-md-12">
-            {% if page_num > 1 %}
-            <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
-            {% else %}
-            <a class="btn btn-outline-primary disabled" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
-            {% endif %}
-            <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
-        </div>
-    </div>
+    <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
+  </div>
+</div>
+
+<hr>
+
+{% for index, row in data.iterrows() %}
+<div><b>paper name:</b> <a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a> (<a
+    href="{{ row['url'] }}" target="_blank">arXiv.org</a>)</div>
+<div><b>category:</b> {{ row['set_spec'] }}</div>
+<div><b>subjects:</b> {{ row['subjects'].split('-----') }}</div>
+<div><b>authors:</b> {{ row['authors'].split('-----') }}</div>
+<div><b>date:</b> {{ row['dates'].split('-----') }}</div>
+<div><b>topic loadings:</b></div>
+<table>
+  {% for val in row['loadings'].round(3) %}
+  <tr>
+    <td>{{ topics[loop.index0] }}</td>
+    <td>{{ val }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<div><b>description:</b></div>
+<div>{{ row['description'] }}</div>
+
+<hr>
+
+{% endfor %}
+<div class="row mb-2">
+  <div class="col-md-12">
+    {% if page_num > 1 %}
+    <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
+    {% else %}
+    <a class="btn btn-outline-primary disabled" href="{{ url_for('papers', page=page_num-1) }}">Previous Page</a>
+    {% endif %}
+    <a class="btn btn-outline-primary" href="{{ url_for('papers', page=page_num+1) }}">Next Page</a>
+  </div>
+</div>
 {% endblock %}

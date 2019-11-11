@@ -1,84 +1,90 @@
 {% extends "layout.html" %}
+
 {% block title %}
-    Paper Report
+Paper Report
 {% endblock %}
+
 {% block head %}
-    {{ super() }}
+{{ super() }}
 {% endblock %}
+
 {% block content %}
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-12 px-0">
-            <h1 class="display-12 font-italic">{{ data['title'] }}</h1>
-            <p class="lead my-3">arXiv paper link: <a href="{{ data['url'] }}" target="_blank">{{ data['url'] }}</a></p>
-            <p class="lead my-3">date: {{ ', '.join(data['dates'].split('-----')) }}</p>
-            <p class="lead my-3">category: {{ data['set_spec'].upper() }}</p>
-        </div>
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+  <div class="col-md-12 px-0">
+    <h1 class="display-12 font-italic">{{ data['title'] }}</h1>
+    <p class="lead my-3">arXiv paper link: <a href="{{ data['url'] }}" target="_blank">{{ data['url'] }}</a></p>
+    <p class="lead my-3">date: {{ ', '.join(data['dates'].split('-----')) }}</p>
+    <p class="lead my-3">category: {{ data['set_spec'].upper() }}</p>
+  </div>
+</div>
+
+
+<div class="row mb-2">
+  <div class="col-md-4">
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-primary">1</strong>
+        <h3 class="mb-0">Subjects</h3>
+        <ul>
+          {% for d in data['subjects'].split('-----') %}
+          <li>
+            <p class="card-text mb-auto">{{ d }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-
-
-    <div class="row mb-2">
-        <div class="col-md-4">
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary">1</strong>
-                <h3 class="mb-0">Subjects</h3>
-                <ul>
-                    {% for d in data['subjects'].split('-----') %}
-                    <li><p class="card-text mb-auto">{{ d }}</p></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-success">2</strong>
-                <h3 class="mb-0">Authors</h3>
-                <ul>
-                    {% for d in data['authors'].split('-----') %}
-                    <li><p class="card-text mb-auto">{{ d }}</p></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-danger">3</strong>
-                    <h3 class="mb-0">Topic Loadings</h3>
-                    <table>
-                            {% for val in data['loadings'].round(3) %}
-                                <tr>
-                                    <td>{{ '%.0f' % (val*100) }}%</td>
-                                    <td>{{ topics[loop.index0] }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                </div>
-                </div>
-            </div>
-        </div>
-        
-    <hr>
-    <div class="row mb-2">
-        <div class="col-md-12">
-            <h3 class="mb-0">Paper Description</h3>
-            {{ data['description'] }}
-        </div>
+  </div><!-- Subjects Card -->
+  <div class="col-md-3">
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-success">2</strong>
+        <h3 class="mb-0">Authors</h3>
+        <ul>
+          {% for d in data['authors'].split('-----') %}
+          <li>
+            <p class="card-text mb-auto">{{ d }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-
-    <hr>
-    <div class="row mb-2">
-        <div class="col-md-12">
-            <h3 class="mb-0">Similar Papers</h3>
-            <ol>
-                {% for index, row in similar_documents_tfidf.iterrows() %}
-                <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
-                {% endfor %}
-            </ol>
-        </div>
+  </div><!-- Authors Card -->
+  <div class="col-md-5">
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-danger">3</strong>
+        <h3 class="mb-0">Topic Loadings</h3>
+        <table>
+          {% for val in data['loadings'].round(3) %}
+          <tr>
+            <td>{{ '%.0f' % (val*100) }}%</td>
+            <td>{{ topics[loop.index0] }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
     </div>
+  </div><!-- Topic Loadings Card -->
+</div>
 
+<hr>
+<div class="row mb-2">
+  <div class="col-md-12">
+    <h3 class="mb-0">Paper Description</h3>
+    {{ data['description'] }}
+  </div>
+</div>
+
+<hr>
+<div class="row mb-2">
+  <div class="col-md-12">
+    <h3 class="mb-0">Similar Papers</h3>
+    <ol>
+      {% for index, row in similar_documents_tfidf.iterrows() %}
+      <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+      {% endfor %}
+    </ol>
+  </div>
+</div>
 {% endblock %}

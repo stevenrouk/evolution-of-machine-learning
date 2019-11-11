@@ -1,43 +1,42 @@
 {% extends "layout.html" %}
+
 {% block title %}
-    Results - {{ query }}
+Results - {{ query }}
 {% endblock %}
+
 {% block head %}
-    {{ super() }}
+{{ super() }}
 {% endblock %}
+
 {% block content %}
+<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
+  <div class="col-md-6 px-0">
+    <h1 class="display-4 font-italic">Search results</h1>
+  </div>
+</div>
 
-    <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-            <h1 class="display-4 font-italic">Search results</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <p><b>Query:</b></p>
-            <p><i>{{ query }}</i></p>
-        </div>
-        <div class="col-md-6">
-            <p><b>Topic loadings:</b></p>
-            <table>
-                {% for val in loadings.round(3) %}
-                    <tr>
-                        <td>{{ topics[loop.index0] }}</td>
-                        <td>{{ val }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <hr>
-    <h2>Similar Papers</h2>
-    <ol>
-    <!-- {% for index, row in similar_docs.iterrows() %}
-        <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a> (<a href="{{ row['url'] }}" target="_blank">arXiv.org</a>)</li>
-    {% endfor %} -->
-    {% for index, row in similar_documents_tfidf.iterrows() %}
-    <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
-    {% endfor %}
-    </ol>
+<div class="row">
+  <div class="col-md-6">
+    <p><b>Query:</b></p>
+    <p><i>{{ query }}</i></p>
+  </div>
+  <div class="col-md-6">
+    <p><b>Topic loadings:</b></p>
+    <table>
+      {% for val in loadings.round(3) %}
+      <tr>
+        <td>{{ topics[loop.index0] }}</td>
+        <td>{{ val }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<hr>
+<h2>Similar Papers</h2>
+<ol>
+  {% for index, row in similar_documents_tfidf.iterrows() %}
+  <li><a href="{{ url_for('report', paper_idx=index) }}">{{ row['title'] }}</a></li>
+  {% endfor %}
+</ol>
 {% endblock %}
