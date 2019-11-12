@@ -22,36 +22,152 @@ Index
   </div>
 </div>
 
-<div class="blog-post">
-  <h2>Heading</h2>
-  <p>Machine learning has been defined as...</p>
-  <p><em>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus,
-      nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum
-      at eros.</em></p>
-  <h3>Sub-heading</h3>
-  <p>Some common examples are...</p>
-  <p><em>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</em></p>
-  <pre><code>Example code block</code></pre>
-  <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus,
-    tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-  <h3>Sub-heading</h3>
-  <p>Machine learning has exploded in recent years, in large part due to breakthroughs made possible by modern computing
-    power, and also because of success in commercial applications of machine learning tools and approaches...</p>
-  <p>We've also seen a huge increase in the number of machine learning research papers published each year...</p>
-  <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla
-    sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor
-    mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-  <ul>
-    <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-    <li>Donec id elit non mi porta gravida at eget metus.</li>
-    <li>Nulla vitae elit libero, a pharetra augue.</li>
-  </ul>
-  <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-  <ol>
-    <li>Vestibulum id ligula porta felis euismod semper.</li>
-    <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-    <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-  </ol>
-  <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+<div class="container">
+  <div class="blog-post">
+    <h3>Project overview</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <p>It's no overstatement to say that machine learning—and data science more broadly—is revolutionizing our
+          society. The purpose of this project was to use <b>unsupervised learning</b> techniques (such as <b>topic
+            modeling</b>, <b>NMF</b>, and others) to analyze the evolution of the field of machine learning over the
+          last 20 years, including an inquiry into various subfields of machine learning and how those have risen and
+          fallen with time.</p>
+          <p>In the menu of this website, you'll find the primary sections of analysis:</p>
+          <ol>
+            <li><b><a href="{{ url_for('how_topics_are_defined') }}">How Topics Are Defined</a></b>—In addition to an explanation of what a "topic" is (hint: one way to think about it is as a subfield of machine learning), the first tab shows the results of topic modeling on the arXiv.org machine learning research paper descriptions. You can see which words are associated with which topics, and the title I decided to give each topic.</li>
+            <li><b><a href="{{ url_for('change_over_time') }}">Change Over Time</a></b>—The graphs on this page show how prevalent each topic has been over the last 20 years. One of the main results from this page is the rise of neural networks and deep learning over the last 5 years.</li>
+            <li><b><a href="{{ url_for('analysis_by_year') }}">Analysis by Year</a></b>—On this page, you can conduct your own analysis by looking at varying numbers of topics for different years. I think it's interesting to see which topics existed in the early 2000s (e.g. AIXI) that don't show up in topics for modern years.</li>
+            <li><b><a href="{{ url_for('papers') }}">All Papers</a></b>—If you want to browse all of the machine learning research papers from arXiv.org, this page lets you do that.</li>
+            <li><b><a href="{{ url_for('get_random_paper') }}">Random ML Paper</a></b>—Or, if you'd prefer to randomly sample from the repository, you can jump to a random paper. For practitioners, this is an excellent way of expanding your horizons.</li>
+            <li><b><a href="{{ url_for('search') }}">Search</a></b>—Finally, I've provided two methods of search functionality to help you find papers.</li>
+          </ol>
+
+        <p>But before we dive any deeper into the details and results of the project, what <em>is</em> machine learning?</p>
+      </div>
+    </div>
+    <h2>What is machine learning?</h2>
+    <div class="row">
+      <div class="col-md-8">
+        <p>According to <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">Wikipedia</a>, "Machine
+          learning (ML) is the scientific study of algorithms and statistical models
+          that computer systems use to perform a specific task without using explicit instructions, relying on patterns
+          and inference instead. It is seen as a subset of artificial intelligence."</p>
+        <p>But perhaps a better way to start this discussion is to talk about what machine learning has <em>done</em> in
+          recent years.</p>
+      </div>
+
+      <div class="col-md-4">
+        <img src="{{ url_for('static', filename='index_images/deep_blue.jpg') }}" class="img-fluid img-thumbnail"
+          alt="Responsive image">
+      </div>
+    </div>
+
+    <h3>A brief history</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Let's walk through a very short history of some defining moments in machine learning from recent(ish) years.
+          <em>(For a bit of context, a few non-machine learning accomplishments have been listed in italicized
+            parentheticals.)</em></p>
+        <ul>
+          <li><em>(The first web browser was made available to the public in 1991.)</em></li>
+          <li>Deep Blue (by IBM) beat Garry Kasparov in chess in 1997.</li>
+          <li><em>(Google was founded in 1998.)</em></li>
+          <li><em>(The first iPhone was released in 2007.)</em></li>
+          <li>Watson (once again by IBM) beat Jeopardy champions Brad Rutter and Ken Jennings in 2011.</li>
+          <li>AlphaGo (by Google/DeepMind) beat a 9-dan professional Go player in 2016.</li>
+          <li>The first self-driving car completed the first DARPA Grand Challenge in 2005. By the end of 2016, Google's
+            fleet of self-driving cars had completed over 2,000,000 autonomous miles.</li>
+          <li>In 2018, an NLP AI by Alibaba outperformed Stanford students on a reading and comprehension test, and
+            Google releases "Duplex", an AI assistant with an incredibly human-like voice that can make reservations for
+            you.</li>
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row">
+          <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+        </div>
+        <div class="row">
+          <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+        </div>
+        <div class="row">
+          <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+        </div>
+      </div>
+    </div>
+
+    <h3>Machine learning in your life</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Although self-driving cars and other futuristic technologies have been in the news much more over the last
+          few years, we don't interact with any of those (yet). However, there are countless examples of ways we
+          <em>do</em> interact with machine learning on a daily basis.</p>
+        <p>For example:</p>
+        <ul>
+          <li>Every time you deposit a check, there is character recognition technology at work reading the check amount
+            and other numbers and letters on the check. That's machine learning at work.</li>
+          <li>Whenever you use Google to search for something, there's a whole suite of machine learning algorithms at
+            work trying to make sure you get the most useful results for <em>you</em>, independent of what other people
+            might find helpful.</li>
+          <li>Digital advertisers are some of the biggest users of machine learning, using your personal data and
+            browsing history to put relevant ads in front of you all over the web.</li>
+          <li>Anytime you use media services like Netflix or Spotify, or e-commerce platforms like Amazon, machine
+            learning is being used to show you recommendations that they think you'll like.</li>
+          <li>Increasingly, machine learning might be used at some point in processing your insurance claims or in
+            diagnosing medical conditions.</li>
+          <li>And finally, if you use Google Translate (machine learning assisted translation), Snapchat (computer
+            vision), Facebook (image recognition), PayPal (fraud detection), or countless other online services, you're
+            using machine learning.</li>
+          <li><em>(And we haven't even discussed at all how the government is using machine learning.)</em></li>
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+      </div>
+    </div>
+
+    <h3>Sub-heading</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Machine learning has exploded in recent years, in large part due to breakthroughs made possible by modern
+          computing power, and also because of success in commercial applications of machine learning tools and
+          approaches. This success and interest can be seen in the exponential growth of machine learning papers
+          published on the open paper repository site <a href="https://arXiv.org">arXiv.org</a>, which was the
+          datasource for the Evolution of Machine Learning project.</p>
+        <p>We've also seen a large increase in the public interest in machine learning, as the Google Trends data shows.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <img src="{{ url_for('static', filename='index_images/ml_papers_published_over_time.png') }}"
+          class="img-fluid img-thumbnail" alt="Responsive image" width="50%">
+      </div>
+    </div>
+
+    <h3>Sub-heading</h3>
+    <div class="row">
+      <div class="col-md-6">
+        something
+      </div>
+      <div class="col-md-6">
+        <img src="{{ url_for('static', filename='index_images/google_trends_ml.png') }}" class="img-fluid img-thumbnail"
+          alt="Responsive image">
+      </div>
+    </div>
+
+    <h3>Sub-heading</h3>
+    <div class="row">
+      <div class="col-md-6">
+        something
+      </div>
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
+      </div>
+    </div>
+    <p><em>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</em></p>
+    <pre><code>Example code block</code></pre>
+    <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus,
+      tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+  </div>
 </div>
 {% endblock %}
