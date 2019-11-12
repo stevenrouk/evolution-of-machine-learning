@@ -1,0 +1,10 @@
+code review feedback
+
+- Need to include Docstrings for functions
+- Could use more classes
+    - for example, a "Topic" class or something -- pass in year and n_components
+    - could have a data cleaner class, modeling class, etc.
+- writing tests
+    - can write tests to test pieces of the functionality (e.g. test that an output file
+      exists after the code executes)
+- have a "verbose" option that does a more full-fledged printing process, etc.
