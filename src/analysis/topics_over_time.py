@@ -43,6 +43,7 @@ def cli():
 @click.option('--use-topic-names', is_flag=True, default=False)
 @click.option('--output', default='')
 @click.option('--output-figsize', nargs=2, default=None, type=int)
+@click.option('--bigger', is_flag=True, default=False)
 def topic_evolution(
         topic_idx,
         n_components,
@@ -52,7 +53,8 @@ def topic_evolution(
         all_topics=False,
         use_topic_names=False,
         output='',
-        output_figsize=None):
+        output_figsize=None,
+        bigger=False):
     """
     Look at the change in topic prevalence over time.
     """
@@ -129,7 +131,10 @@ def topic_evolution(
             year = str(year)
             vals.append(W_series[years == year])
 
-        _, axs = plt.subplots(1, 1)
+        if bigger:
+            _, axs = plt.subplots(1, 1, figsize=(6.4*2, 4.8*2))
+        else:
+            _, axs = plt.subplots(1, 1)
         if not isinstance(axs, np.ndarray):
             axs = np.array([axs])
         axs = axs.flatten()
