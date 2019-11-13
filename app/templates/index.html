@@ -59,7 +59,7 @@ Index
     </div>
     <h2>What is machine learning?</h2>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <p>According to <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">Wikipedia</a>, "Machine
           learning (ML) is the scientific study of algorithms and statistical models
           that computer systems use to perform a specific task without using explicit instructions, relying on patterns
@@ -67,16 +67,11 @@ Index
         <p>But perhaps a better way to start this discussion is to talk about what machine learning has <em>done</em> in
           recent years.</p>
       </div>
-
-      <div class="col-md-4">
-        <img src="{{ url_for('static', filename='index_images/deep_blue.jpg') }}" class="img-fluid img-thumbnail"
-          alt="Responsive image">
-      </div>
     </div>
 
     <h3>A brief history</h3>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <p>Let's walk through a very short history of some defining moments in machine learning from recent(ish) years.
           <em>(For a bit of context, a few non-machine learning accomplishments have been listed in italicized
             parentheticals.)</em></p>
@@ -95,22 +90,29 @@ Index
         </ul>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="row">
-          <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+          <div class="text-center">
+            <img src="{{ url_for('static', filename='index_images/deep_blue.jpg') }}" class="img-fluid img-thumbnail"
+              alt="Responsive image">
+            <small>IBM's Deep Blue beats Garry Kasparov</small>
+          </div>
+
         </div>
         <div class="row">
-          <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
-        </div>
-        <div class="row">
-          <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+          <div class="text-center">
+            <img src="{{ url_for('static', filename='index_images/face_recognition.png') }}"
+              class="img-fluid img-thumbnail" alt="Responsive image">
+            <br>
+            <small>Face recognition</small>
+          </div>
         </div>
       </div>
     </div>
 
     <h3>Machine learning in your life</h3>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <p>Although self-driving cars and other futuristic technologies have been in the news much more over the last
           few years, we don't interact with any of those (yet). However, there are countless examples of ways we
           <em>do</em> interact with machine learning on a daily basis.</p>
@@ -134,40 +136,55 @@ Index
         </ul>
       </div>
 
-      <div class="col-md-6">
-        <img src="" class="img-fluid img-thumbnail" alt="Responsive image">
+      <div class="col-md-5">
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='index_images/waymo.png') }}" class="img-fluid img-thumbnail"
+            alt="Responsive image">
+          <br>
+          <small>Waymo self-driving car</small>
+        </div>
       </div>
     </div>
 
     <h3>A meteoric rise</h3>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <p>Machine learning has exploded in recent years, in large part due to breakthroughs made possible by modern
           computing power, and also because of success in commercial applications of machine learning tools and
           approaches. This success and interest can be seen in the exponential growth of machine learning papers
           published on the open paper repository site <a href="https://arXiv.org">arXiv.org</a>, which was the
           datasource for the Evolution of Machine Learning project.</p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
+        <div class="text-center">
         <img src="{{ url_for('static', filename='index_images/ml_papers_published_over_time.png') }}"
           class="img-fluid img-thumbnail" alt="Responsive image" width="75%">
+          <br>
+          <small>Number of ML papers published on arXiv.org over time</small>
+        </div>
       </div>
     </div>
 
+    <br>
+
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <p>We've also seen a large increase in the public interest in machine learning, as the Google Trends data shows.
         </p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
+        <div class="text-center">
         <img src="{{ url_for('static', filename='index_images/google_trends_ml.png') }}" class="img-fluid img-thumbnail"
           alt="Responsive image">
+          <br>
+          <small>Google Trends data for "machine learning"</small>
+        </div>
       </div>
     </div>
 
     <h2>Data & Research Question</h2>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <p>There are 1.6 million research papers hosted on <a href="https://www.arxiv.org">arXiv.org</a>, around 50,000
           of which are categorized as machine learning papers. arXiv generously makes the paper metadata freely
           available through their open API, which means that it was fairly easy to pull paper descriptions, authors,
@@ -179,14 +196,19 @@ Index
           <li>See how those subfields of machine learning have evolved over time.</li>
         </ol>
       </div>
-      <div class="col-md-6">
-        <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
+      <div class="col-md-5">
+        <div class="text-center">
+        <img src="{{ url_for('static', filename='index_images/arxiv_example.png') }}" class="img-fluid img-thumbnail"
+          alt="Responsive image">
+          <br>
+          <small>Example paper from arXiv.org</small>
+        </div>
       </div>
     </div><!-- Row -->
 
     <h2>Method</h2>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <p>Although there are many techniques that can be used to analyze text data, and a subset of those techniques
           that can be used to cluster text data into various groups, I settled on <b>non-negative matrix factorization
             (NMF)</b> as my technique of choice, paired with featurizing the data into a term-frequency
@@ -195,21 +217,56 @@ Index
           removing punctuation, removing stopwords using the standard nltk corpus, and using unigrams (bag of words) to
           create a tf-idf matrix.</p>
       </div>
-      <div class="col-md-6">
-        <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
+      <div class="col-md-5 text-center">
+        <a href="https://commons.wikimedia.org/wiki/File:NMF.png#/media/File:NMF.png" target="_blank"><img
+            src="https://upload.wikimedia.org/wikipedia/commons/f/f9/NMF.png" class="img-fluid img-thumbnail"
+            alt="Responsive image"></a>
+        <br><small>Simple visual depiction of NMF by <a
+            href="//commons.wikimedia.org/w/index.php?title=User:Qwertyus&amp;action=edit&amp;redlink=1" class="new"
+            title="User:Qwertyus (page does not exist)">Qwertyus</a> - <span class="int-own-work" lang="en">Own
+            work</span>, <a href="https://creativecommons.org/licenses/by-sa/3.0"
+            title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a
+            href="https://commons.wikimedia.org/w/index.php?curid=29114677">Link</a></small>
       </div>
     </div><!-- Row -->
 
     <h3>Number of Topics</h3>
     <div class="row">
-      <div class="col-md-6">
-        <p>For an introduction to topic modeling using NMF, see here: <a href="#">(insert link)</a>.</p>
+      <div class="col-md-7">
+        <p>For an introduction to topic modeling using NMF, see here: <a
+            href="https://mlexplained.com/2017/12/28/a-practical-introduction-to-nmf-nonnegative-matrix-factorization/"
+            target="_blank">A Practical Introduction to NMF</a>.</p>
         <p>After trying many different numbers of topics, I decided to use 10 topics for the primary analysis because it
           gave detailed results while still being a reasonable number of manually sift through.</p>
-          <p>I thought that 20 topics also yielding very interesting results, with the added benefit that there were additional clearly-defined subfields of machine learning that didn't come out of the 10-topic analysis. To see an approximation of these topics for the full corpus, you can select 20 topics and the year 2019 or 2018 on the <a href="/analysis-by-year?year=2019&num_topics=20">Analysis by Year</a> page. <em>(In the future I may add the functionality to look at varying numbers of topics for the full corpus.)</em></p>
+        <p>I thought that 20 topics also yielding very interesting results, with the added benefit that there were
+          additional clearly-defined subfields of machine learning that didn't come out of the 10-topic analysis. To see
+          an approximation of these topics for the full corpus, you can select 20 topics and the year 2019 or 2018 on
+          the <a href="/analysis-by-year?year=2019&num_topics=20">Analysis by Year</a> page. <em>(In the future I may
+            add the functionality to look at varying numbers of topics for the full corpus.)</em></p>
+        <p>As one important note: whenever you see "loadings", such as "topics loadings", it simply means how much that
+          document (or that word) relates to that topic. So the word "neural" will load heavily onto the neural network
+          topic, and a research paper about neural networks will also load heavily onto that topic.</p>
       </div>
-      <div class="col-md-6">
-        <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
+      <div class="col-md-5">
+        <div class="text-center">
+          <img src="{{ url_for('static', filename='index_images/topic_loadings.png') }}" class="img-fluid img-thumbnail"
+            alt="Responsive image" width="80%">
+            <br>
+          <small>An example of topic loadings for a document</small>
+        </div>
+      </div>
+    </div><!-- Row -->
+
+    <h2>Diving In Further</h2>
+    <div class="row">
+      <div class="col-md-7">
+        <p>Here is where I'll let you loose to investigate the rest of the findings yourself!</p>
+        <p>You'll find the specific words that make up each topic on the <b>How Topics Are Defined</b> page. You can see
+          how
+          these topics have changed over time (make sure to look at the Neural Nets / Deep Learning topic) on the
+          <b>Change Over Time</b> page. And, make sure to use the <b>Search</b> for research papers that you're
+          interested in and see what topics were assigned to that paper.</p>
+        <p>I hope you find this analysis and tool useful!</p>
       </div>
     </div><!-- Row -->
 
