@@ -95,3 +95,6 @@ target/
 
 # In progress
 deploy.sh
+
+# Internal reference notes
+references/web-app.txt
