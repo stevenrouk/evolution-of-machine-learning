@@ -32,17 +32,29 @@ Index
             modeling</b>, <b>NMF</b>, and others) to analyze the evolution of the field of machine learning over the
           last 20 years, including an inquiry into various subfields of machine learning and how those have risen and
           fallen with time.</p>
-          <p>In the menu of this website, you'll find the primary sections of analysis:</p>
-          <ol>
-            <li><b><a href="{{ url_for('how_topics_are_defined') }}">How Topics Are Defined</a></b>—In addition to an explanation of what a "topic" is (hint: one way to think about it is as a subfield of machine learning), the first tab shows the results of topic modeling on the arXiv.org machine learning research paper descriptions. You can see which words are associated with which topics, and the title I decided to give each topic.</li>
-            <li><b><a href="{{ url_for('change_over_time') }}">Change Over Time</a></b>—The graphs on this page show how prevalent each topic has been over the last 20 years. One of the main results from this page is the rise of neural networks and deep learning over the last 5 years.</li>
-            <li><b><a href="{{ url_for('analysis_by_year') }}">Analysis by Year</a></b>—On this page, you can conduct your own analysis by looking at varying numbers of topics for different years. I think it's interesting to see which topics existed in the early 2000s (e.g. AIXI) that don't show up in topics for modern years.</li>
-            <li><b><a href="{{ url_for('papers') }}">All Papers</a></b>—If you want to browse all of the machine learning research papers from arXiv.org, this page lets you do that.</li>
-            <li><b><a href="{{ url_for('get_random_paper') }}">Random ML Paper</a></b>—Or, if you'd prefer to randomly sample from the repository, you can jump to a random paper. For practitioners, this is an excellent way of expanding your horizons.</li>
-            <li><b><a href="{{ url_for('search') }}">Search</a></b>—Finally, I've provided two methods of search functionality to help you find papers.</li>
-          </ol>
+        <p>In the menu of this website, you'll find the primary sections of analysis:</p>
+        <ol>
+          <li><b><a href="{{ url_for('how_topics_are_defined') }}">How Topics Are Defined</a></b>—In addition to an
+            explanation of what a "topic" is (hint: one way to think about it is as a subfield of machine learning), the
+            first tab shows the results of topic modeling on the arXiv.org machine learning research paper descriptions.
+            You can see which words are associated with which topics, and the title I decided to give each topic.</li>
+          <li><b><a href="{{ url_for('change_over_time') }}">Change Over Time</a></b>—The graphs on this page show how
+            prevalent each topic has been over the last 20 years. One of the main results from this page is the rise of
+            neural networks and deep learning over the last 5 years.</li>
+          <li><b><a href="{{ url_for('analysis_by_year') }}">Analysis by Year</a></b>—On this page, you can conduct your
+            own analysis by looking at varying numbers of topics for different years. I think it's interesting to see
+            which topics existed in the early 2000s (e.g. AIXI) that don't show up in topics for modern years.</li>
+          <li><b><a href="{{ url_for('papers') }}">All Papers</a></b>—If you want to browse all of the machine learning
+            research papers from arXiv.org, this page lets you do that.</li>
+          <li><b><a href="{{ url_for('get_random_paper') }}">Random ML Paper</a></b>—Or, if you'd prefer to randomly
+            sample from the repository, you can jump to a random paper. For practitioners, this is an excellent way of
+            expanding your horizons.</li>
+          <li><b><a href="{{ url_for('search') }}">Search</a></b>—Finally, I've provided two methods of search
+            functionality to help you find papers.</li>
+        </ol>
 
-        <p>But before we dive any deeper into the details and results of the project, what <em>is</em> machine learning?</p>
+        <p>But before we dive any deeper into the details and results of the project, what <em>is</em> machine learning?
+        </p>
       </div>
     </div>
     <h2>What is machine learning?</h2>
@@ -127,47 +139,80 @@ Index
       </div>
     </div>
 
-    <h3>Sub-heading</h3>
+    <h3>A meteoric rise</h3>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <p>Machine learning has exploded in recent years, in large part due to breakthroughs made possible by modern
           computing power, and also because of success in commercial applications of machine learning tools and
           approaches. This success and interest can be seen in the exponential growth of machine learning papers
           published on the open paper repository site <a href="https://arXiv.org">arXiv.org</a>, which was the
           datasource for the Evolution of Machine Learning project.</p>
-        <p>We've also seen a large increase in the public interest in machine learning, as the Google Trends data shows.
-        </p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <img src="{{ url_for('static', filename='index_images/ml_papers_published_over_time.png') }}"
-          class="img-fluid img-thumbnail" alt="Responsive image" width="50%">
+          class="img-fluid img-thumbnail" alt="Responsive image" width="75%">
       </div>
     </div>
 
-    <h3>Sub-heading</h3>
     <div class="row">
-      <div class="col-md-6">
-        something
+      <div class="col-md-8">
+        <p>We've also seen a large increase in the public interest in machine learning, as the Google Trends data shows.
+        </p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <img src="{{ url_for('static', filename='index_images/google_trends_ml.png') }}" class="img-fluid img-thumbnail"
           alt="Responsive image">
       </div>
     </div>
 
-    <h3>Sub-heading</h3>
+    <h2>Data & Research Question</h2>
     <div class="row">
       <div class="col-md-6">
-        something
+        <p>There are 1.6 million research papers hosted on <a href="https://www.arxiv.org">arXiv.org</a>, around 50,000
+          of which are categorized as machine learning papers. arXiv generously makes the paper metadata freely
+          available through their open API, which means that it was fairly easy to pull paper descriptions, authors,
+          etc. for all of the machine learning papers (and indeed, all of the papers).</p>
+        <p>The purpose of this project was to see if I could use natural language processing techniques on the machine
+          learning paper descriptions to:</p>
+        <ol>
+          <li>Identify subfields of machine learning; and,</li>
+          <li>See how those subfields of machine learning have evolved over time.</li>
+        </ol>
       </div>
       <div class="col-md-6">
         <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
       </div>
-    </div>
-    <p><em>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</em></p>
-    <pre><code>Example code block</code></pre>
-    <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus,
-      tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+    </div><!-- Row -->
+
+    <h2>Method</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Although there are many techniques that can be used to analyze text data, and a subset of those techniques
+          that can be used to cluster text data into various groups, I settled on <b>non-negative matrix factorization
+            (NMF)</b> as my technique of choice, paired with featurizing the data into a term-frequency
+          document-inverse-frequency (tf-idf) matrix.</p>
+        <p>After experimenting with many different preprocessing steps, I decided to have a very simple process of
+          removing punctuation, removing stopwords using the standard nltk corpus, and using unigrams (bag of words) to
+          create a tf-idf matrix.</p>
+      </div>
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
+      </div>
+    </div><!-- Row -->
+
+    <h3>Number of Topics</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <p>For an introduction to topic modeling using NMF, see here: <a href="#">(insert link)</a>.</p>
+        <p>After trying many different numbers of topics, I decided to use 10 topics for the primary analysis because it
+          gave detailed results while still being a reasonable number of manually sift through.</p>
+          <p>I thought that 20 topics also yielding very interesting results, with the added benefit that there were additional clearly-defined subfields of machine learning that didn't come out of the 10-topic analysis. To see an approximation of these topics for the full corpus, you can select 20 topics and the year 2019 or 2018 on the <a href="/analysis-by-year?year=2019&num_topics=20">Analysis by Year</a> page. <em>(In the future I may add the functionality to look at varying numbers of topics for the full corpus.)</em></p>
+      </div>
+      <div class="col-md-6">
+        <img src="https://via.placeholder.com/300.png" class="img-fluid img-thumbnail" alt="Responsive image">
+      </div>
+    </div><!-- Row -->
+
   </div>
 </div>
 {% endblock %}
