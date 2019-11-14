@@ -1,0 +1,1 @@
+conda create -n webapp Flask Flask-WTF scikit-learn pandas numpy matplotlib jupyter click requests gunicorn
