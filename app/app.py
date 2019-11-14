@@ -90,7 +90,7 @@ def index():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    return redirect(url_for('index')) 
+    return redirect(url_for('index'))
 
 
 @app.route('/blog-example')
